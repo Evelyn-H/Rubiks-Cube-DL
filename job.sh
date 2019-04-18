@@ -1,23 +1,14 @@
-#!/usr/bin/env zsh
+#!/usr/local_rwth/bin/zsh
 
-### Job name
-#BSUB -J RubiksDL
+# ask for 10 GB memory
+#SBATCH --mem-per-cpu=4G
+# name the job
+#SBATCH --job-name=RubiksDL
+# declare the merged STDOUT/STDERR file
+#SBATCH --output=output.%J.txt
 
-### File / path where STDOUT & STDERR will be written
-###    %J is the job ID, %I is the array ID
-#BSUB -o RubiksDL.%J.%I
-
-### Request the time you need for execution in minutes
-### The format for the parameter is: [hour:]minute,
-### that means for 80 minutes you could also use this: 1:20
-#BSUB -W 1:00
-
-### Request memory you need for your job in TOTAL in MB
-#BSUB -M 4096
-
-### GPU
-#BSUB -gpu -
-#BSUB -R pascal
+# GPU
+#SBATCH --gres=gpu:1
 
 ### Change to the work directory
 cd ~/Rubiks-Cube-DL/
