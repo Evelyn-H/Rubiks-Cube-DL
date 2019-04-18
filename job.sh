@@ -14,6 +14,9 @@
 #SBATCH --time=00:59:00
 
 ### Change to the work directory
+export PATH=$PATH:~/.local/bin
+module load python/3.6.0
+
 cd ~/Rubiks-Cube-DL/
 
 ### Execute your application
