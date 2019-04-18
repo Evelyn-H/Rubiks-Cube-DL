@@ -10,6 +10,9 @@
 # GPU
 #SBATCH --gres=gpu:1
 
+# time
+#SBATCH --time=00:59:00
+
 ### Change to the work directory
 cd ~/Rubiks-Cube-DL/
 pipenv shell
