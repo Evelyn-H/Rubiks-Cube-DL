@@ -15,7 +15,6 @@
 
 ### Change to the work directory
 cd ~/Rubiks-Cube-DL/
-pipenv shell
 
 ### Execute your application
-python train.py --ini ini/cube2x2-zero-goal-d200.ini -n run_${LSB_JOBID}
+pipenv run python train.py --ini ini/cube2x2-zero-goal-d200.ini -n run_${LSB_JOBID}
