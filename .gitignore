@@ -10,3 +10,4 @@ __pycache__
 .venv
 output
 .tags
+.tags_swap

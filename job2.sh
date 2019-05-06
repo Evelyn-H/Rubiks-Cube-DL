@@ -23,7 +23,7 @@
 #SBATCH --gres=gpu:1
 
 # max runing time
-#SBATCH --time=00:59:00
+#SBATCH --time=01:59:00
 
 
 ### SCRIPT TO RUN
