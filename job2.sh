@@ -14,7 +14,7 @@
 #SBATCH --mem-per-cpu=4G
 
 # job name
-#SBATCH --job-name=RubiksDL
+#SBATCH --job-name=RubiksDL2
 
 # declare the merged STDOUT/STDERR file
 #SBATCH --output=output/output.%J.txt
@@ -38,4 +38,4 @@ cd ~/Rubiks-Cube-DL/
 
 # run file through pipenv
 # (makes sure dependencies are all there)
-pipenv run python train.py --ini ini/cube2x2-zero-goal-d200.ini -n run_${LSB_JOBID}
+pipenv run python train.py --ini ini/cube2x2-zero-goal-d200.ini -n run_${SLURM_JOBID}
