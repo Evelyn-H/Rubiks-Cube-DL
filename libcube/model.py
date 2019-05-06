@@ -118,11 +118,17 @@ def sample_batch(scramble_buffer, net, device, batch_size, value_targets):
         # find target value and target policy
         max_val_t, max_act_t = value_t.max(dim=1)
     elif value_targets == ValueTargetsMethod.ZeroGoalValue:
+        # value_t -= 1.0
+        # max_val_t, max_act_t = value_t.max(dim=1)
+        # goal_indices = np.nonzero(is_goals)
+        # max_val_t[goal_indices] = 0.0
+        # max_act_t[goal_indices] = 0
         value_t -= 1.0
         max_val_t, max_act_t = value_t.max(dim=1)
         goal_indices = np.nonzero(is_goals)
-        max_val_t[goal_indices] = 0.0
-        max_act_t[goal_indices] = 0
+        max_val_t[goal_indices] = 1.0
+        # max_act_t[goal_indices] = 0
+
     else:
         assert False, "Unsupported method of value targets"
 
