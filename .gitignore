@@ -5,4 +5,6 @@ saves
 .ipynb_checkpoints
 *.log
 
+__pycache__
+
 .venv

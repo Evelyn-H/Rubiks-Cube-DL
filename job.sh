@@ -1,11 +1,18 @@
 #!/usr/local_rwth/bin/zsh
 
+# COMMANDS to remember:
+#  - shh login:     ssh -l ppxxxxxx login18-g-1.hpc.itc.rwth-aachen.de
+#  - submit job:    sbatch <script>.sh
+#  - list jobs:     sacct
+#  - list gpu's:    nvidia-smi
+
+
 # ask for 10 GB memory
 #SBATCH --mem-per-cpu=4G
 # name the job
 #SBATCH --job-name=RubiksDL
 # declare the merged STDOUT/STDERR file
-#SBATCH --output=output.%J.txt
+#SBATCH --output=output/output.%J.txt
 
 # GPU
 #SBATCH --gres=gpu:1
