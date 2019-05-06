@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     log.info("Generate scramble buffer...")
     scramble_buf = collections.deque(maxlen=config.scramble_buffer_batches*config.train_batch_size)
-    scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size*2, config.train_scramble_depth))
+    scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size*config.scramble_buffer_batches, config.train_scramble_depth))
     log.info("Generated buffer of size %d", len(scramble_buf))
 
     while True:
