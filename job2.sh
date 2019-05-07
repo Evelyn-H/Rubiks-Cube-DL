@@ -38,4 +38,4 @@ cd ~/Rubiks-Cube-DL/
 
 # run file through pipenv
 # (makes sure dependencies are all there)
-pipenv run python train.py --ini ini/cube2x2-zero-goal-d200.ini -n run_${SLURM_JOBID}
+pipenv run python train.py --ini ini/cube2x2-zero-goal-d200-noweight.ini -n run_${SLURM_JOBID}
