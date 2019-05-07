@@ -13,7 +13,7 @@ board:
 	tensorboard --logdir=runs/ --port 54321
 
 output:
-	cd output && tail -f -n 50 $(ls -t | head -n1)
+	cd output && tail -f -n 50 $(shell ls -t | head -n1)
 
 plots:
 	python solver.py --env cube2x2 --cuda --plot plots/ --model saves/$(model) --max-time 20 --samples 20 --max-depth 20
