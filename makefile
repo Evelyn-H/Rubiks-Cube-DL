@@ -16,7 +16,7 @@ output:
 	cd output && tail -f -n 50 $(ls -t | head -n1)
 
 plots:
-	python solver.py --env cube3x3 --cuda --plot plots/ --model saves/$(model) --max-time 20 --samples 5
+	python solver.py --env cube3x3 --cuda --plot plots/ --model saves/$(model) --max-time 20 --samples 20 --max-depth 20
 
 submit:
 	sbatch --output="output/output.%J.$(shell date +"%Y-%m-%d_%H-%M").txt" "$(job).sh"
