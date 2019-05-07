@@ -75,9 +75,8 @@ class Greedy:
 
         return None
 
-
     def find_solution(self):
-        return None
+        return []
 
     def eval_states_values(self, states):
         enc_states = model.encode_states(self.cube_env, states)
