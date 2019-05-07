@@ -87,6 +87,7 @@ class Greedy:
     def dump_solution(self, solution):
         assert isinstance(solution, list)
 
+        print("==== SOLUTION ====")
         s = self.root_state
         r = self.cube_env.render(s)
         print(r)
@@ -96,6 +97,8 @@ class Greedy:
             s = self.cube_env.transform(s, a)
             r = self.cube_env.render(s)
             print(r)
+        print("==== END OF SOLUTION ====")
+
 
     def __len__(self):
         return 0
