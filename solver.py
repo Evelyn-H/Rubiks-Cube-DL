@@ -137,6 +137,10 @@ def solve_task(env, task, net, cube_idx=None, max_seconds=DEFAULT_MAX_SECONDS, m
 #                tree.dump_solution(bfs_solution)
 #                tree.dump_root()
 #                log.info("Tree: %s", tree)
+
+            print('==== TASK:', task, '====')
+            tree.dump_solution(solution)
+
             return tree, solution
         step_no += 1
         if max_steps is not None:
