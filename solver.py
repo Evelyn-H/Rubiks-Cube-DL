@@ -246,7 +246,7 @@ if __name__ == "__main__":
         log.info("Produce plots with prefix %s", args.plot)
         data = gather_data(cube_env, net, args.max_time, args.max_steps, args.max_depth, args.samples,
                            args.batch, device)
-        produce_plots(data, args.plot, args.max_time)
+        produce_plots(data, args.plot, args.max_time, args.max_steps)
     elif args.output is not None:
         data = gather_data(cube_env, net, args.max_time, args.max_steps, args.max_depth, args.samples,
                            args.batch, device)
