@@ -1,12 +1,72 @@
 import random
 import numpy as np
 import collections
+import queue
 
 from . import cubes
 from . import model
 
 import torch
 import torch.nn.functional as F
+
+
+class Greedy:
+    """
+    Best-first search using the value network
+    """
+
+    def __init__(self, cube_env, state, net, device, max_depth=50):
+        assert isinstance(cube_env, cubes.CubeEnv)
+        assert cube_env.is_state(state)
+
+        self.cube_env = cube_env
+        self.root_state = state
+        self.max_depth = max_depth
+        self.net = net
+        self.device = device
+
+    def search(self):
+        # note, the queue is lowest-first,
+        # but our values need to be best-first (i.e. highest)
+        # so, we subtract the value from an arbitrary high number
+        # and use that as the key
+        max_val = 1000
+        q = queue.PriorityQueue()
+        q.put((max_val, self.root_state, []))
+        seen = set()
+
+        while not q.empty():
+            value, s, path = q.get()
+            seen.add(s)
+            c_states, c_goals = self.cube_env.explore_state(s)
+            values = self.eval_states_values(c_states)
+            for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
+                p = path + [a_idx]
+                if c_goal:
+                    self.dump_solution(p)
+                    return p
+                if c_state in seen:
+                    continue
+                q.append((max_val - value, c_state, p))
+
+    def eval_states_values(self, states):
+        enc_states = model.encode_states(self.cube_env, states)
+        enc_states_t = torch.tensor(enc_states).to(self.device)
+        value_t = self.net(enc_states_t, value_only=True)
+        return value_t.detach().cpu().numpy()
+
+    def dump_solution(self, solution):
+        assert isinstance(solution, list)
+
+        s = self.root_state
+        r = self.cube_env.render(s)
+        print(r)
+        for aidx in solution:
+            a = self.cube_env.action_enum(aidx)
+            print(a, aidx)
+            s = self.cube_env.transform(s, a)
+            r = self.cube_env.render(s)
+            print(r)
 
 
 class MCTS:
@@ -238,5 +298,3 @@ class MCTS:
                 if c_state in seen or c_state not in self.edges:
                     continue
                 queue.append((c_state, p))
-
-
