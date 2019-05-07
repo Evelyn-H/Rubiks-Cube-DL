@@ -17,7 +17,7 @@
 #SBATCH --job-name=RubiksDL2
 
 # declare the merged STDOUT/STDERR file
-#SBATCH --output=output/output.%J.txt
+#commented SBATCH --output=output/output.%J.txt
 
 # GPU
 #SBATCH --gres=gpu:1
