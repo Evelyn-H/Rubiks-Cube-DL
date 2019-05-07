@@ -56,11 +56,8 @@ class Greedy:
         while depth < self.max_depth:
             depth += 1
 
-            print('.', end='')
             c_states, c_goals = self.cube_env.explore_state(next_state)
-            print('e', end='')
             values = self.eval_states_values(c_states)
-            print('v', end='')
 
             best_value = None
             best_state = None
@@ -76,7 +73,6 @@ class Greedy:
 
             path += [best_action]
             next_state = best_state
-        print('\nno solution found :(')
 
         return None
 
