@@ -97,6 +97,9 @@ class Greedy:
             r = self.cube_env.render(s)
             print(r)
 
+    def __len__(self):
+        return 0
+
     def get_depth_stats(self):
         return {
             'max': 0,
