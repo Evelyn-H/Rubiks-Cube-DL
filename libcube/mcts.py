@@ -15,7 +15,7 @@ class Greedy:
     Best-first search using the value network
     """
 
-    def __init__(self, cube_env, state, net, device, max_depth=50):
+    def __init__(self, cube_env, state, net, device, max_depth=100):
         assert isinstance(cube_env, cubes.CubeEnv)
         assert cube_env.is_state(state)
 
@@ -26,28 +26,58 @@ class Greedy:
         self.device = device
 
     def search(self):
-        # note, the queue is lowest-first,
-        # but our values need to be best-first (i.e. highest)
-        # so, we subtract the value from an arbitrary high number
-        # and use that as the key
-        max_val = 1000
-        q = queue.PriorityQueue()
-        q.put((max_val, self.root_state, []))
-        seen = set()
+        # # note, the queue is lowest-first,
+        # # but our values need to be best-first (i.e. highest)
+        # # so, we subtract the value from an arbitrary high number
+        # # and use that as the key
+        # max_val = 1000
+        # q = queue.PriorityQueue()
+        # q.put((max_val, self.root_state, []))
+        # seen = set()
+        #
+        # while not q.empty():
+        #     value, s, path = q.get()
+        #     seen.add(s)
+        #     c_states, c_goals = self.cube_env.explore_state(s)
+        #     values = self.eval_states_values(c_states)
+        #     for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
+        #         p = path + [a_idx]
+        #         if c_goal:
+        #             self.dump_solution(p)
+        #             return p
+        #         if c_state in seen:
+        #             continue
+        #         q.append((max_val - value, c_state, p))
 
-        while not q.empty():
-            value, s, path = q.get()
-            seen.add(s)
-            c_states, c_goals = self.cube_env.explore_state(s)
+        path = []
+        next_state = self.root_state
+
+        depth = 0
+        while depth < self.max_depth:
+            depth += 1
+
+            c_states, c_goals = self.cube_env.explore_state(next_state)
             values = self.eval_states_values(c_states)
+
+            best_value = None
+            best_state = None
             for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
-                p = path + [a_idx]
                 if c_goal:
-                    self.dump_solution(p)
-                    return p
-                if c_state in seen:
-                    continue
-                q.append((max_val - value, c_state, p))
+                    self.dump_solution(path + [a_idx])
+                    return path + [a_idx]
+
+                if best_value is None or value > best_value:
+                    best_value = value
+                    best_state = c_state
+
+            path += [a_idx]
+            next_state = best_state
+
+        return None
+
+
+    def find_solution(self):
+        return None
 
     def eval_states_values(self, states):
         enc_states = model.encode_states(self.cube_env, states)
@@ -67,6 +97,13 @@ class Greedy:
             s = self.cube_env.transform(s, a)
             r = self.cube_env.render(s)
             print(r)
+
+    def get_depth_stats(self):
+        return {
+            'max': 0,
+            'mean': 0,
+            'leaves': 0
+        }
 
 
 class MCTS:
