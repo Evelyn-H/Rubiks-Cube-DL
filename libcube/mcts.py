@@ -57,12 +57,13 @@ class Greedy:
             depth += 1
 
             c_states, c_goals = self.cube_env.explore_state(next_state)
-            policies, values = self.evaluate_states(c_states)
+            policy, _ = self.evaluate_states(next_state)
+            _, values = self.evaluate_states(c_states)
 
             best_value = None
             best_state = None
             best_action = None
-            for a_idx, (policy, value, c_state, c_goal) in enumerate(zip(policies, values, c_states, c_goals)):
+            for a_idx, (probability, value, c_state, c_goal) in enumerate(zip(policy, values, c_states, c_goals)):
                 if c_goal:
                     return path + [a_idx]
 
@@ -70,10 +71,8 @@ class Greedy:
                 #     best_value = value
                 #     best_state = c_state
                 #     best_action = a_idx
-                print(policy)
-                
-                if best_value is None or policy > best_value:
-                    best_value = policy
+                if best_value is None or probability > best_value:
+                    best_value = probability
                     best_state = c_state
                     best_action = a_idx
 
