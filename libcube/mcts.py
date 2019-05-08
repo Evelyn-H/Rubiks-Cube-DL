@@ -66,18 +66,18 @@ class Greedy:
             # otherwise...
 
             # policy search
-            policy = self.evaluate_states([next_state])[0][0]
-
-            action = np.argmax(policy)
-            next_state = c_states[action]
-            path += [action]
-
-            # # value search
-            # _, values = self.evaluate_states(c_states)
-            # 
-            # action = np.argmax(values)
+            # policy = self.evaluate_states([next_state])[0][0]
+            #
+            # action = np.argmax(policy)
             # next_state = c_states[action]
             # path += [action]
+
+            # # value search
+            _, values = self.evaluate_states(c_states)
+
+            action = np.argmax(values)
+            next_state = c_states[action]
+            path += [action]
 
         return None
 
