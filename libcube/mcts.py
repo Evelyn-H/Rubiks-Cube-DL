@@ -68,7 +68,10 @@ class Greedy:
         q.put((max_val, self.root_state, []))
         seen = set()
 
+        iterations = 0
+
         while not q.empty():
+            iterations += 1
             value, s, path = q.get()
             seen.add(s)
             c_states, c_goals = self.cube_env.explore_state(s)
@@ -76,6 +79,7 @@ class Greedy:
             for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
                 path += [a_idx]
                 if c_goal:
+                    print(iterations)
                     return path
                 if c_state in seen:
                     continue
