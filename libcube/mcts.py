@@ -82,7 +82,7 @@ class Greedy:
             for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
                 path += [a_idx]
                 if c_goal:
-                    print(iterations)
+                    # print(iterations)
                     return path
                 if c_state in seen:
                     continue
