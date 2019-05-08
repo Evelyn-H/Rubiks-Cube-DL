@@ -74,7 +74,7 @@ class Greedy:
             iterations += 1
             if iterations > 5000:
                 return None
-                
+
             value, s, path = q.get()
             seen.add(s)
             c_states, c_goals = self.cube_env.explore_state(s)
