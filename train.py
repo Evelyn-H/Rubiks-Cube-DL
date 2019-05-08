@@ -67,20 +67,27 @@ if __name__ == "__main__":
             scramble_buf, net, device, config.train_batch_size, value_targets_method)
 
         opt.zero_grad()
+        # get outputs
         policy_out_t, value_out_t = net(x_t)
         value_out_t = value_out_t.squeeze(-1)
+        # value loss
         value_loss_t = (value_out_t - y_value_t)**2
         value_loss_raw_t = value_loss_t.mean()
+        # value weighting
         if config.weight_samples:
             value_loss_t *= weights_t
         value_loss_t = value_loss_t.mean()
+        # policy loss
         policy_loss_t = F.cross_entropy(policy_out_t, y_policy_t, reduction='none')
         policy_loss_raw_t = policy_loss_t.mean()
+        # policy weighting
         if config.weight_samples:
             policy_loss_t *= weights_t
         policy_loss_t = policy_loss_t.mean()
+        # total loss
         loss_raw_t = policy_loss_raw_t + value_loss_raw_t
         loss_t = value_loss_t + policy_loss_t
+        # backprop
         loss_t.backward()
         opt.step()
 
