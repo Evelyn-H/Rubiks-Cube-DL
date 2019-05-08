@@ -56,35 +56,28 @@ class Greedy:
         while depth < self.max_depth:
             depth += 1
 
+            # explore possible moves
             c_states, c_goals = self.cube_env.explore_state(next_state)
-            policy, _ = self.evaluate_states([next_state])
-            policy = policy[0]
-            # _, values = self.evaluate_states(c_states)
-            # pmax, vmax = np.argmax(policy), np.argmax(values)
-            # print(pmax == vmax, pmax, vmax)
-            # print(policy)
-            # print(values)
-            # print('-------------')
-
-            best_value = None
-            best_state = None
-            best_action = None
-            # for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
-            for a_idx, (probability, c_state, c_goal) in enumerate(zip(policy, c_states, c_goals)):
+            # if one of them solves it, go with that
+            for a_idx, (c_state, c_goal) in enumerate(zip(c_states, c_goals)):
                 if c_goal:
                     return path + [a_idx]
 
-                # if best_value is None or value > best_value:
-                #     best_value = value
-                #     best_state = c_state
-                #     best_action = a_idx
-                if best_value is None or probability > best_value:
-                    best_value = probability
-                    best_state = c_state
-                    best_action = a_idx
+            # otherwise...
 
-            path += [best_action]
-            next_state = best_state
+            # policy search
+            policy = self.evaluate_states([next_state])[0][0]
+
+            action = np.argmax(policy)
+            next_state = c_states[action]
+            path += [action]
+
+            # # value search
+            # _, values = self.evaluate_states(c_states)
+            # 
+            # action = np.argmax(values)
+            # next_state = c_states[action]
+            # path += [action]
 
         return None
 
