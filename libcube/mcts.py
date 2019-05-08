@@ -79,7 +79,7 @@ class Greedy:
                     return path
                 if c_state in seen:
                     continue
-                q.append((max_val - value, c_state, path))
+                q.put((max_val - value, c_state, path))
 
     def search(self):
         return self.bfs()
