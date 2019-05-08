@@ -70,6 +70,8 @@ class Greedy:
                 #     best_value = value
                 #     best_state = c_state
                 #     best_action = a_idx
+                print(policy)
+                
                 if best_value is None or policy > best_value:
                     best_value = policy
                     best_state = c_state
