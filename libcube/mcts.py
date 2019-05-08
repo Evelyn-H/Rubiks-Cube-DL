@@ -61,9 +61,9 @@ class Greedy:
             _, values = self.evaluate_states(c_states)
             pmax, vmax = np.argmax(policy[0]), np.argmax(values)
             print(pmax == vmax, pmax, vmax)
-            print(policy)
-            print(values)
-            print('-------------')
+            # print(policy)
+            # print(values)
+            # print('-------------')
 
             best_value = None
             best_state = None
