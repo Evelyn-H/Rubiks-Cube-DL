@@ -57,17 +57,21 @@ class Greedy:
             depth += 1
 
             c_states, c_goals = self.cube_env.explore_state(next_state)
-            values = self.eval_states_values(c_states)
+            policies, values = self.evaluate_states(c_states)
 
             best_value = None
             best_state = None
             best_action = None
-            for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
+            for a_idx, (policy, value, c_state, c_goal) in enumerate(zip(policies, values, c_states, c_goals)):
                 if c_goal:
                     return path + [a_idx]
 
-                if best_value is None or value > best_value:
-                    best_value = value
+                # if best_value is None or value > best_value:
+                #     best_value = value
+                #     best_state = c_state
+                #     best_action = a_idx
+                if best_value is None or policy > best_value:
+                    best_value = policy
                     best_state = c_state
                     best_action = a_idx
 
@@ -78,6 +82,13 @@ class Greedy:
 
     def find_solution(self):
         return []
+
+    def evaluate_states(self, states):
+        enc_states = model.encode_states(self.cube_env, states)
+        enc_states_t = torch.tensor(enc_states).to(self.device)
+        policy_t, value_t = self.net(enc_states_t)
+        policy_t = F.softmax(policy_t, dim=1)
+        return policy_t.detach().cpu().numpy(), value_t.squeeze(-1).detach().cpu().numpy()
 
     def eval_states_values(self, states):
         enc_states = model.encode_states(self.cube_env, states)
