@@ -41,7 +41,8 @@ if __name__ == "__main__":
 
     net = model.Net(cube_env.encoded_shape, len(cube_env.action_enum)).to(device)
     print(net)
-    opt = optim.Adam(net.parameters(), lr=config.train_learning_rate)
+    # opt = optim.Adam(net.parameters(), lr=config.train_learning_rate)
+    opt = optim.RMSprop(net.parameters(), lr=config.train_learning_rate)
     sched = scheduler.StepLR(opt, 1, gamma=config.train_lr_decay_gamma) if config.train_lr_decay_enabled else None
 
     step_idx = 0
