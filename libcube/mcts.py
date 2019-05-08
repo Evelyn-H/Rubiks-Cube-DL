@@ -57,9 +57,9 @@ class Greedy:
             depth += 1
 
             c_states, c_goals = self.cube_env.explore_state(next_state)
-            policy, _ = self.evaluate_states([next_state])
+            policy, _ = self.evaluate_states([next_state])[0]
             _, values = self.evaluate_states(c_states)
-            pmax, vmax = np.argmax(policy[0]), np.argmax(values)
+            pmax, vmax = np.argmax(policy), np.argmax(values)
             # print(pmax == vmax, pmax, vmax)
             # print(policy)
             # print(values)
