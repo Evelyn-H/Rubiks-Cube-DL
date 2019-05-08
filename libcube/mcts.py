@@ -57,7 +57,7 @@ class Greedy:
             depth += 1
 
             c_states, c_goals = self.cube_env.explore_state(next_state)
-            policy, _ = self.evaluate_states(next_state)
+            policy, _ = self.evaluate_states([next_state])
             _, values = self.evaluate_states(c_states)
 
             best_value = None
