@@ -30,7 +30,7 @@ if __name__ == "__main__":
     device = torch.device("cuda" if config.train_cuda else "cpu")
 
     name = config.train_name(suffix=args.name)
-    writer = SummaryWriter(comment="-" + name)
+    writer = SummaryWriter(comment="-" + name + '_' + os.getenv('name', ''))
     save_path = os.path.join("saves", name)
     os.makedirs(save_path)
 
