@@ -18,5 +18,6 @@ output:
 plots:
 	python solver.py --env cube2x2 --cuda --plot plots/ --model saves/$(model) --max-time 20 --samples 20 --max-depth 20
 
+export name
 submit:
 	sbatch --output="output/output.%J.$(shell date +"%Y-%m-%d_%H-%M").txt" "$(job).sh"
