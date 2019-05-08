@@ -20,7 +20,7 @@ log = logging.getLogger("train_debug")
 
 
 # How many data to generate for plots
-MAX_DEPTH = 10
+MAX_DEPTH = 30
 ROUND_COUNTS = 100
 # debug params
 #MAX_DEPTH = 5
