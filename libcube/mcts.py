@@ -25,30 +25,7 @@ class Greedy:
         self.net = net
         self.device = device
 
-    def search(self):
-        # # note, the queue is lowest-first,
-        # # but our values need to be best-first (i.e. highest)
-        # # so, we subtract the value from an arbitrary high number
-        # # and use that as the key
-        # max_val = 1000
-        # q = queue.PriorityQueue()
-        # q.put((max_val, self.root_state, []))
-        # seen = set()
-        #
-        # while not q.empty():
-        #     value, s, path = q.get()
-        #     seen.add(s)
-        #     c_states, c_goals = self.cube_env.explore_state(s)
-        #     values = self.eval_states_values(c_states)
-        #     for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
-        #         p = path + [a_idx]
-        #         if c_goal:
-        #             self.dump_solution(p)
-        #             return p
-        #         if c_state in seen:
-        #             continue
-        #         q.append((max_val - value, c_state, p))
-
+    def simple_traversal(self):
         path = []
         next_state = self.root_state
 
@@ -80,6 +57,33 @@ class Greedy:
             path += [action]
 
         return None
+
+    def bfs(self):
+        # note, the queue is lowest-first,
+        # but our values need to be best-first (i.e. highest)
+        # so, we subtract the value from an arbitrary high number
+        # and use that as the key
+        max_val = 1000
+        q = queue.PriorityQueue()
+        q.put((max_val, self.root_state, []))
+        seen = set()
+
+        while not q.empty():
+            value, s, path = q.get()
+            seen.add(s)
+            c_states, c_goals = self.cube_env.explore_state(s)
+            values = self.eval_states_values(c_states)
+            for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
+                path += [a_idx]
+                if c_goal:
+                    return path
+                if c_state in seen:
+                    continue
+                q.append((max_val - value, c_state, path))
+
+    def search(self):
+        return self.bfs()
+        # return self.simple_traversal()
 
     def find_solution(self):
         return []
