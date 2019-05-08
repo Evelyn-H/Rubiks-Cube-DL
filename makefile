@@ -1,4 +1,4 @@
-.PHONY: default connect forward board output plots submit
+.PHONY: default connect forward board output plots submit debug
 
 
 default: ;
@@ -16,8 +16,10 @@ output:
 	tail -f -n 50 output/$(shell ls output -t | head -n1)
 
 plots:
-	python solver.py --env cube2x2 --cuda --plot plots/ --model saves/$(model) --max-time 20 --samples 20 --max-depth 20
+	python solver.py --env cube2x2 --cuda --plot plots/$(name) --model saves/$(model) --max-time 20 --samples 20 --max-depth 20
 
-export name
+debug:
+	python train_debug.py --env cube2x2 --model saves/$(model) --output plots/$(name)
+
 submit:
 	sbatch --output="output/output.%J.$(shell date +"%Y-%m-%d_%H-%M").txt" "$(job).sh"

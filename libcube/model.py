@@ -126,7 +126,7 @@ def sample_batch(scramble_buffer, net, device, batch_size, value_targets):
         value_t -= 1.0
         max_val_t, max_act_t = value_t.max(dim=1)
         goal_indices = np.nonzero(is_goals)
-        max_val_t[goal_indices] = 1.0
+        max_val_t[goal_indices] = 0.0
         max_act_t[goal_indices] = 0
 
     else:
