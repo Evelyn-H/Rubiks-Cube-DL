@@ -49,6 +49,7 @@ if __name__ == "__main__":
     buf_policy_loss, buf_value_loss, buf_loss = [], [], []
     buf_policy_loss_raw, buf_value_loss_raw, buf_loss_raw = [], [], []
     buf_mean_values = []
+    buf_weights, buf_weights_min, buf_weights_max = [], [], []
     ts = time.time()
     best_loss = None
 
@@ -99,6 +100,10 @@ if __name__ == "__main__":
         opt.step()
 
         # save data
+        buf_weights.append(decay_weights.mean().item())
+        buf_weights_min.append(decay_weights.min()[0].item())
+        buf_weights_max.append(decay_weights.max()[1].item())
+
         buf_mean_values.append(value_out_t.mean().item())
         buf_policy_loss.append(policy_loss_t.item())
         buf_value_loss.append(value_loss_t.item())
@@ -122,6 +127,13 @@ if __name__ == "__main__":
             buf_policy_loss_raw.clear()
             buf_loss_raw.clear()
 
+            m_weights = np.mean(buf_weights)
+            m_weights_min = np.mean(buf_weights_min)
+            m_weights_max = np.mean(buf_weights_max)
+            buf_weights.clear()
+            buf_weights_min.clear()
+            buf_weights_max.clear()
+
             m_values = np.mean(buf_mean_values)
             buf_mean_values.clear()
 
@@ -138,6 +150,9 @@ if __name__ == "__main__":
             writer.add_scalar("loss_policy_raw", m_policy_loss_raw, step_idx)
             writer.add_scalar("loss_value_raw", m_value_loss_raw, step_idx)
             writer.add_scalar("loss_raw", m_loss_raw, step_idx)
+            writer.add_scalar("weights", m_weights, step_idx)
+            writer.add_scalar("weights_min", m_weights_min, step_idx)
+            writer.add_scalar("weights_max", m_weights_max, step_idx)
             writer.add_scalar("values", m_values, step_idx)
             writer.add_scalar("speed", speed, step_idx)
 
