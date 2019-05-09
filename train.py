@@ -67,7 +67,7 @@ if __name__ == "__main__":
             writer.add_scalar("lr", sched.get_lr()[0], step_idx)
 
         if step_idx % 1000 == 0:
-            weight_decay_mult *= 0.85
+            # weight_decay_mult *= 0.85
             log.info("Weight decay multiplier decreased to %s", weight_decay_mult)
 
         step_idx += 1
@@ -171,8 +171,10 @@ if __name__ == "__main__":
                 best_loss = m_loss
 
         if step_idx % config.push_scramble_buffer_iters == 0:
-            scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size,
-                                                           config.train_scramble_depth))
+            # scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size,
+                                                           # config.train_scramble_depth))
+            scramble_buf = model.make_scramble_buffer(cube_env, config.train_batch_size * config.scramble_buffer_batches, config.train_scramble_depth)
+
             log.info("Pushed new data in scramble buffer, new size = %d", len(scramble_buf))
 
         if config.train_checkpoint_batches is not None and step_idx % config.train_checkpoint_batches == 0:
