@@ -63,11 +63,9 @@ class Greedy:
     def bfs(self):
         # note, the queue is lowest-first,
         # but our values need to be best-first (i.e. highest)
-        # so, we subtract the value from an arbitrary high number
-        # and use that as the key
-        max_val = 1000
+        # so, we just used `-value` instead
         q = queue.PriorityQueue()
-        q.put((max_val, self.root_state, []))
+        q.put((-1000, self.root_state, []))
         seen = set()
 
         iterations = 0
@@ -92,7 +90,9 @@ class Greedy:
                     return p
                 if c_state in seen:
                     continue
-                q.put((max_val - value, c_state, p))
+
+                heuristic = -value
+                q.put((heuristic, c_state, p))
 
     def search(self):
         return self.bfs()
