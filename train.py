@@ -53,6 +53,8 @@ if __name__ == "__main__":
     ts = time.time()
     best_loss = None
 
+    weight_decay_mult = 1.0
+
     log.info("Generate scramble buffer...")
     scramble_buf = collections.deque(maxlen=config.scramble_buffer_batches*config.train_batch_size)
     scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size*config.scramble_buffer_batches, config.train_scramble_depth))
@@ -64,6 +66,10 @@ if __name__ == "__main__":
             log.info("LR decrease to %s", sched.get_lr()[0])
             writer.add_scalar("lr", sched.get_lr()[0], step_idx)
 
+        if step_idx % 1000 == 0:
+            weight_decay_mult *= 0.85
+            log.info("Weight decay multiplier decreased to %s", weight_decay_mult)
+
         step_idx += 1
         x_t, weights_t, y_policy_t, y_value_t = model.sample_batch(
             scramble_buf, net, device, config.train_batch_size, value_targets_method)
@@ -74,7 +80,8 @@ if __name__ == "__main__":
         value_out_t = value_out_t.squeeze(-1)
 
         # decay weights
-        decay_weights = 1 - (1 - weights_t) * 2.71**(-step_idx / 3000)
+        # decay_weights = 1 - (1 - weights_t) * 2.71**(-step_idx / 3000)
+        decay_weights = 1 - (1 - weights_t) * weight_decay_mult
 
         # value loss
         value_loss_t = (value_out_t - y_value_t)**2
