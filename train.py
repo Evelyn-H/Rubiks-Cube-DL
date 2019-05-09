@@ -173,7 +173,7 @@ if __name__ == "__main__":
         if step_idx % config.push_scramble_buffer_iters == 0:
             # scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size,
                                                            # config.train_scramble_depth))
-            scramble_buf = model.make_scramble_buffer(cube_env, config.train_batch_size * config.scramble_buffer_batches, config.train_scramble_depth)
+            scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size * config.scramble_buffer_batches, config.train_scramble_depth))
 
             log.info("Pushed new data in scramble buffer, new size = %d", len(scramble_buf))
 
