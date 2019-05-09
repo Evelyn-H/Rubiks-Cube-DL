@@ -15,6 +15,7 @@ import matplotlib as mpl; mpl.use('Agg')
 import seaborn as sns
 import matplotlib.pylab as plt
 import torch
+import numpy as np
 
 from libcube import cubes
 from libcube import model
@@ -86,7 +87,8 @@ def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_de
                     solved_count += 1
             log.info("Depth %d processed, solved %d/%d (%.2f%%)", depth, solved_count, samples_per_depth,
                      100.0*solved_count/samples_per_depth)
-            print('iterations per solve:', min(iterations_needed), sum(iterations_needed) / len(iterations_needed), max(iterations_needed))
+            # print('iterations per solve:', min(iterations_needed), sum(iterations_needed) / len(iterations_needed), max(iterations_needed))
+            print('iterations per solve:', np.percentile(iterations_needed, [0, 25, 50, 75, 100]))
     except KeyboardInterrupt:
         log.info("Interrupt received, got %d data samples, use them", len(result))
     return result
