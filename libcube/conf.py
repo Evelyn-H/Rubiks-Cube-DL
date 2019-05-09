@@ -89,6 +89,10 @@ class Config:
     def weight_samples(self):
         return self.sect_train.getboolean('weight_samples', True)
 
+    @property
+    def iterative_scramble_deepening(self):
+        return self.sect_train.getboolean('iterative_scramble_deepening', False)
+
     # higher-level functions
     def train_name(self, suffix=None):
         res = "%s-%s-d%d" % (self.cube_type, self.run_name, self.train_scramble_depth)
