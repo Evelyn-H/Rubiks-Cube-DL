@@ -45,6 +45,15 @@ def generate_task(env, depth):
     return res
 
 
+def is_solution_valid(cube_env, initial, solution):
+    s = initial
+    for aidx in solution:
+        a = cube_env.action_enum(aidx)
+        s = cube_env.transform(s, a)
+
+    return s, cube_env.is_goal(s)
+
+
 def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_depth, batch_size, device):
     """
     Try to solve lots of cubes to get data
@@ -69,6 +78,16 @@ def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_de
                 task = generate_task(cube_env, depth)
                 tree, solution = solve_task(cube_env, task, net, cube_idx=task_idx, max_seconds=max_seconds,
                                             max_steps=max_steps, device=device, quiet=True, batch_size=batch_size)
+
+                # check if it's actually solved
+                scrambled = cube_env.scramble(map(cube_env.action_enum, task))
+                final_state, is_valid = is_solution_valid(cube_env, scrambled, solution)
+                if not is_valid:
+                    print('INVALID SOLUTION RETURNED:', cube_env.render(final_state))
+                    print('scramble:', task)
+                    print('solution:', solution)
+
+
                 is_solved = solution is not None
                 stop_dt = datetime.datetime.utcnow()
                 duration = (stop_dt - start_dt).total_seconds()
