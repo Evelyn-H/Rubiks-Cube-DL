@@ -179,9 +179,9 @@ if __name__ == "__main__":
             if config.iterative_scramble_deepening:
                 current_scramble_depth += 1
 
-            scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size,
-                                                           current_scramble_depth))
-            # scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size * config.scramble_buffer_batches, current_scramble_depth))
+            # scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size,
+                                                           # current_scramble_depth))
+            scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size * config.scramble_buffer_batches, current_scramble_depth))
 
             log.info("Pushed new data in scramble buffer, new size = %d", len(scramble_buf))
 
