@@ -81,7 +81,7 @@ class Greedy:
             c_states, c_goals = self.cube_env.explore_state(s)
             # values = self.eval_states_values(c_states)
             policy, values = self.evaluate_states(c_states)
-            for a_idx, (probability, value, c_state, c_goal) in enumerate(zip(policy, values, c_states, c_goals)):
+            for a_idx, (probability, value, c_state, c_goal) in enumerate(zip(policy[0], values, c_states, c_goals)):
                 self.nodes_evaluated += 1
 
                 p = path + [a_idx]
