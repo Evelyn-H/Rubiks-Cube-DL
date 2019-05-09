@@ -59,7 +59,7 @@ class Greedy:
             next_state = c_states[action]
             path += [action]
 
-        self.iterations_needed = 1000
+        self.iterations_needed = self.max_depth
         return None
 
     def bfs(self):
@@ -96,12 +96,12 @@ class Greedy:
                 # if c_state in seen:
                     # continue
 
-                heuristic = -value + len(p) - probability
+                heuristic = -value + len(p)/2 - probability
                 q.put((heuristic, c_state, p))
 
     def search(self):
-        # return self.bfs()
-        return self.simple_traversal()
+        return self.bfs()
+        # return self.simple_traversal()
 
     def find_solution(self):
         return []
