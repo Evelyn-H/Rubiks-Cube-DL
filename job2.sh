@@ -11,7 +11,7 @@
 ### CONFIGURATION
 
 # memory
-#SBATCH --mem-per-cpu=4G
+#SBATCH --mem-per-cpu=8G
 
 # job name
 #SBATCH --job-name=RubiksDL2
