@@ -72,7 +72,7 @@ class Greedy:
 
         while not q.empty():
             iterations += 1
-            if iterations > 5000:
+            if iterations > 10000:
                 self.iterations_needed = iterations
                 return None
 
