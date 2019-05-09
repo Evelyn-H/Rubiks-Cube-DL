@@ -24,6 +24,8 @@ class Greedy:
         self.max_depth = max_depth
         self.net = net
         self.device = device
+        self.iterations_needed = -1
+        self.nodes_evaluated = 0
 
     def simple_traversal(self):
         path = []
@@ -73,6 +75,7 @@ class Greedy:
         while not q.empty():
             iterations += 1
             if iterations > 5000:
+                self.iterations_needed = iterations
                 return None
 
             value, s, path = q.get()
@@ -80,8 +83,11 @@ class Greedy:
             c_states, c_goals = self.cube_env.explore_state(s)
             values = self.eval_states_values(c_states)
             for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
+                self.nodes_evaluated += 1
+
                 path += [a_idx]
                 if c_goal:
+                    self.iterations_needed = iterations
                     # print(iterations)
                     return path
                 if c_state in seen:
@@ -125,13 +131,13 @@ class Greedy:
 
 
     def __len__(self):
-        return 0
+        return self.iterations_needed
 
     def get_depth_stats(self):
         return {
             'max': 0,
             'mean': 0,
-            'leaves': 0
+            'leaves': self.nodes_evaluated,
         }
 
 

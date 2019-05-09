@@ -60,6 +60,8 @@ def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_de
     try:
         for depth in range(1, max_depth+1):
             solved_count = 0
+
+            iterations_needed = []
             for task_idx in tqdm(range(samples_per_depth)):
                 start_dt = datetime.datetime.utcnow()
                 task = generate_task(cube_env, depth)
@@ -79,10 +81,12 @@ def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_de
                                        sol_len_naive=sol_len_naive, sol_len_bfs=sol_len_bfs,
                                        depth_max=tree_depth_stats['max'], depth_mean=tree_depth_stats['mean'])
                 result.append(data_point)
+                iterations_needed.append(len(tree))
                 if is_solved:
                     solved_count += 1
             log.info("Depth %d processed, solved %d/%d (%.2f%%)", depth, solved_count, samples_per_depth,
                      100.0*solved_count/samples_per_depth)
+            print('iterations per solve:', min(iterations_needed), sum(iterations_needed) / len(iterations_needed), max(iterations_needed))
     except KeyboardInterrupt:
         log.info("Interrupt received, got %d data samples, use them", len(result))
     return result
