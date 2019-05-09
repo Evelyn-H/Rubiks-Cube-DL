@@ -40,6 +40,7 @@ class Greedy:
             # if one of them solves it, go with that
             for a_idx, (c_state, c_goal) in enumerate(zip(c_states, c_goals)):
                 if c_goal:
+                    self.iterations_needed = len(path) + 1
                     return path + [a_idx]
 
             # otherwise...
@@ -58,6 +59,7 @@ class Greedy:
             next_state = c_states[action]
             path += [action]
 
+        self.iterations_needed = 1000
         return None
 
     def bfs(self):
@@ -78,7 +80,7 @@ class Greedy:
                 return None
 
             value, s, path = q.get()
-            seen.add(s)
+            # seen.add(s)
             c_states, c_goals = self.cube_env.explore_state(s)
             # values = self.eval_states_values(c_states)
             policy, values = self.evaluate_states(c_states)
@@ -91,15 +93,15 @@ class Greedy:
                     # print(iterations)
                     return p
 
-                if c_state in seen:
-                    continue
+                # if c_state in seen:
+                    # continue
 
                 heuristic = -value + len(p) - probability
                 q.put((heuristic, c_state, p))
 
     def search(self):
-        return self.bfs()
-        # return self.simple_traversal()
+        # return self.bfs()
+        return self.simple_traversal()
 
     def find_solution(self):
         return []
