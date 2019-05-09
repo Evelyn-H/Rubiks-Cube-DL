@@ -78,7 +78,7 @@ class Greedy:
                 return None
 
             value, s, path = q.get()
-            # seen.add(s)
+            seen.add(s)
             c_states, c_goals = self.cube_env.explore_state(s)
             # values = self.eval_states_values(c_states)
             policy, values = self.evaluate_states(c_states)
@@ -90,8 +90,9 @@ class Greedy:
                     self.iterations_needed = iterations
                     # print(iterations)
                     return p
-                # if c_state in seen:
-                    # continue
+
+                if c_state in seen:
+                    continue
 
                 heuristic = -value + len(p) - probability
                 q.put((heuristic, c_state, p))
