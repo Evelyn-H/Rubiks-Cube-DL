@@ -10,7 +10,7 @@ forward:
 	ssh -l pp563877 login18-g-1.hpc.itc.rwth-aachen.de -L 54321:localhost:54321
 
 board:
-	tensorboard --logdir=runs/ --port 54321
+	pipenv run tensorboard --logdir=runs/ --port 54321
 
 output:
 	tail -f -n 50 output/$(shell ls output -t | head -n1)
