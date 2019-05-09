@@ -84,7 +84,7 @@ def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_de
                                        depth_max=tree_depth_stats['max'], depth_mean=tree_depth_stats['mean'])
                 result.append(data_point)
                 iterations_needed.append(len(tree))
-                iterations_needed.append(len(solution))
+                solution_length.append(len(solution))
                 if is_solved:
                     solved_count += 1
             log.info("Depth %d processed, solved %d/%d (%.2f%%)", depth, solved_count, samples_per_depth,
@@ -92,7 +92,7 @@ def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_de
 
             np.set_printoptions(formatter={'float': '{: 0.1f}'.format})
             print('iterations per solve:', np.percentile(iterations_needed, [0, 25, 50, 75, 100]))
-            print('solution length:', np.percentile(iterations_needed, [0, 25, 50, 75, 100]))
+            print('solution length:', np.percentile(solution_length, [0, 25, 50, 75, 100]))
     except KeyboardInterrupt:
         log.info("Interrupt received, got %d data samples, use them", len(result))
     return result
