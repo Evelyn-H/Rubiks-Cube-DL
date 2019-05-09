@@ -81,11 +81,12 @@ def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_de
 
                 # check if it's actually solved
                 scrambled = cube_env.scramble(map(cube_env.action_enum, task))
-                final_state, is_valid = is_solution_valid(cube_env, scrambled, solution)
-                if not is_valid:
-                    print('INVALID SOLUTION RETURNED:', cube_env.render(final_state))
-                    print('scramble:', task)
-                    print('solution:', solution)
+                if solution is not None:
+                    final_state, is_valid = is_solution_valid(cube_env, scrambled, solution)
+                    if not is_valid:
+                        print('INVALID SOLUTION RETURNED:', cube_env.render(final_state))
+                        print('scramble:', task)
+                        print('solution:', solution)
 
 
                 is_solved = solution is not None
