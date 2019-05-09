@@ -91,7 +91,7 @@ class Greedy:
                 if c_state in seen:
                     continue
 
-                heuristic = -value
+                heuristic = -value + len(p)
                 q.put((heuristic, c_state, p))
 
     def search(self):
