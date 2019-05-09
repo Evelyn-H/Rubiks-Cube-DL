@@ -101,8 +101,8 @@ if __name__ == "__main__":
 
         # save data
         buf_weights.append(decay_weights.mean().item())
-        buf_weights_min.append(decay_weights.min()[0].item())
-        buf_weights_max.append(decay_weights.max()[1].item())
+        buf_weights_min.append(decay_weights.min().item())
+        buf_weights_max.append(decay_weights.max().item())
 
         buf_mean_values.append(value_out_t.mean().item())
         buf_policy_loss.append(policy_loss_t.item())
