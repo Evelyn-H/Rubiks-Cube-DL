@@ -85,14 +85,14 @@ class Greedy:
             for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
                 self.nodes_evaluated += 1
 
-                path += [a_idx]
+                p = path + [a_idx]
                 if c_goal:
                     self.iterations_needed = iterations
                     # print(iterations)
-                    return path
+                    return p
                 if c_state in seen:
                     continue
-                q.put((max_val - value, c_state, path))
+                q.put((max_val - value, c_state, p))
 
     def search(self):
         return self.bfs()
