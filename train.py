@@ -72,7 +72,7 @@ if __name__ == "__main__":
             writer.add_scalar("lr", sched.get_lr()[0], step_idx)
 
         if step_idx % 1000 == 0:
-            # weight_decay_mult *= 0.85
+            weight_decay_mult *= 0.8
             log.info("Weight decay multiplier decreased to %s", weight_decay_mult)
 
         step_idx += 1
