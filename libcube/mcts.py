@@ -72,6 +72,9 @@ class Greedy:
 
         iterations = 0
 
+        # TODO: How can we parallelise this procedure?
+        #  - maybe just push the first n items in the list to the NN at once? 
+
         while not q.empty():
             iterations += 1
             # if iterations > 10000:
