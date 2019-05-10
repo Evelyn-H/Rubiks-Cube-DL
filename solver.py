@@ -103,8 +103,8 @@ def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_de
                                        sol_len_naive=sol_len_naive, sol_len_bfs=sol_len_bfs,
                                        depth_max=tree_depth_stats['max'], depth_mean=tree_depth_stats['mean'])
                 result.append(data_point)
-                iterations_needed.append(len(tree))
                 if solution:
+                    iterations_needed.append(len(tree))
                     solution_length.append(len(solution))
 
                 if is_solved:
