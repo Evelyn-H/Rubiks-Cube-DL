@@ -99,7 +99,7 @@ class Greedy:
                     # print(iterations)
                     return p
 
-                if c_state in seen:
+                # if c_state in seen:
                     # continue
 
                 heuristic = -value + len(p)# - probability
