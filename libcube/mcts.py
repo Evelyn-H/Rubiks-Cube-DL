@@ -2,6 +2,7 @@ import random
 import numpy as np
 import collections
 import queue
+from profilehooks import profile
 
 from . import cubes
 from . import model
@@ -62,6 +63,7 @@ class Greedy:
         self.iterations_needed = self.max_depth
         return None
 
+    @profile
     def bfs(self):
         # note, the queue is lowest-first,
         # but our values need to be best-first (i.e. highest)
@@ -73,7 +75,7 @@ class Greedy:
         iterations = 0
 
         # TODO: How can we parallelise this procedure?
-        #  - maybe just push the first n items in the list to the NN at once? 
+        #  - maybe just push the first n items in the list to the NN at once?
 
         while not q.empty():
             iterations += 1
