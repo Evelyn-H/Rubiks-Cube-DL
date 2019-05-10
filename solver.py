@@ -68,7 +68,7 @@ def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_de
     """
     result = []
     try:
-        for depth in range(10, max_depth+1):
+        for depth in range(1, max_depth+1):
             solved_count = 0
 
             iterations_needed = []
