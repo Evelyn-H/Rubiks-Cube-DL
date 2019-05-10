@@ -106,7 +106,7 @@ if __name__ == "__main__":
         policy_loss_t = policy_loss_t.mean()
         # total loss
         loss_raw_t = policy_loss_raw_t + value_loss_raw_t
-        loss_t = value_loss_t + policy_loss_t
+        loss_t = value_loss_t + 0*policy_loss_t
         # backprop
         loss_t.backward()
         opt.step()
@@ -176,12 +176,11 @@ if __name__ == "__main__":
                 best_loss = m_loss
 
         if step_idx % config.push_scramble_buffer_iters == 0:
-            if config.iterative_scramble_deepening:
+            if step_idx % config.push_scramble_buffer_iters * 3 and config.iterative_scramble_deepening:
                 current_scramble_depth += 1
 
-            scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size,
-                                                           current_scramble_depth))
-            # scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size * config.scramble_buffer_batches, current_scramble_depth))
+            # scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size, current_scramble_depth))
+            scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size * config.scramble_buffer_batches, current_scramble_depth))
 
             log.info("Pushed new data in scramble buffer, new size = %d", len(scramble_buf))
 
