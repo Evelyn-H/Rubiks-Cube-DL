@@ -178,6 +178,7 @@ if __name__ == "__main__":
         if step_idx % config.push_scramble_buffer_iters == 0:
             if step_idx % config.push_scramble_buffer_iters * 3 and config.iterative_scramble_deepening:
                 current_scramble_depth += 1
+                log.info("Deepening scrambles, new depth = %d", current_scramble_depth)
 
             # scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size, current_scramble_depth))
             scramble_buf.extend(model.make_scramble_buffer(cube_env, config.train_batch_size * config.scramble_buffer_batches, current_scramble_depth))
