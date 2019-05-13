@@ -132,7 +132,7 @@ if __name__ == "__main__":
             def validation_stats(scramble_depth):
                 solutions, iterations = validation.solve_random_cubes(cube_env,
                     scramble_depth=scramble_depth,
-                    amount=20,
+                    amount=100,
                     max_iterations=200,
                     net=net, device=device)
 

@@ -95,7 +95,7 @@ class Config:
 
     @property
     def validation_iters(self):
-        return self.sect_train.getint('validation_iters', 100)
+        return self.sect_train.getint('validation_iters', 500)
 
     # higher-level functions
     def train_name(self, suffix=None):
