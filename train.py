@@ -130,7 +130,7 @@ if __name__ == "__main__":
             print(" ==== Validation ==== ")
 
             solutions, iterations = validation.solve_random_cubes(cube_env,
-                scramble_depth=20,
+                scramble_depth=1,
                 amount=20,
                 max_iterations=200,
                 net=net, device=device)
