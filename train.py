@@ -139,11 +139,11 @@ if __name__ == "__main__":
             lengths = [len(s) for s in solved]
 
             print(" ==== Validation ==== ")
-            print('iterations per solve:', np.percentile(iterations, [0, 25, 50, 75, 100]))
+            print('iterations per solve:', np.percentile([i for i in iterations if i], [0, 25, 50, 75, 100]))
             print('solution length:', np.percentile(lengths, [0, 25, 50, 75, 100]))
 
             pct_solved = len([s for s in solved]) / len(solutions)
-            iterations_75_percentile = np.percentile(lengths, [75])[0]
+            iterations_75_percentile = np.percentile([i for i in iterations if i], [75])[0]
             writer.add_scalar("validation_pct_solved", pct_solved, step_idx)
             writer.add_scalar("iterations_75_percentile", iterations_75_percentile, step_idx)
 
