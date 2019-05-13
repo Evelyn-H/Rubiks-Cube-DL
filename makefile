@@ -16,7 +16,7 @@ output:
 	tail -f -n 50 output/$(shell ls output -t | head -n1)
 
 plots:
-	pipenv run python solver.py --env cube2x2 --cuda --plot plots/$(name) --model saves/$(model) --max-time 20 --samples 20 --max-depth 20
+	pipenv run python solver.py --env cube2x2 --cuda --plot plots/$(name) --model saves/$(model) --max-steps 1 --samples 20 --max-depth 20
 
 debug:
 	pipenv run python train_debug.py --env cube2x2 --model saves/$(model) --output plots/$(name)
