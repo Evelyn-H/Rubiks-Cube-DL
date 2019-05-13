@@ -145,7 +145,7 @@ if __name__ == "__main__":
                 if len(iterations_not_none) > 0:
                     iterations_75_percentile = np.percentile(iterations_not_none, [75])[0]
                 else:
-                    iterations_75_percentile = 0
+                    iterations_75_percentile = -1
 
                 np.set_printoptions(formatter={'float': '{: 0.1f}'.format})
                 print('depth:', scramble_depth)
