@@ -141,7 +141,7 @@ if __name__ == "__main__":
                 lengths = [len(s) for s in solved]
                 iterations_not_none = [i for i in iterations if i]
 
-                pct_solved = len([s for s in solved]) / len(solutions)
+                pct_solved = len([s for s in solved]) / len(solutions) * 100
                 if len(iterations_not_none) > 0:
                     iterations_75_percentile = np.percentile(iterations_not_none, [75])[0]
                 else:
