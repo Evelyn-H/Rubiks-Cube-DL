@@ -16,13 +16,14 @@ class Greedy:
     Best-first search using the value network
     """
 
-    def __init__(self, cube_env, state, net, device, max_depth=100):
+    def __init__(self, cube_env, state, net, device, max_depth=100, max_iterations=2000):
         assert isinstance(cube_env, cubes.CubeEnv)
         assert cube_env.is_state(state)
 
         self.cube_env = cube_env
         self.root_state = state
         self.max_depth = max_depth
+        self.max_iterations = max_iterations
         self.net = net
         self.device = device
         self.iterations_needed = -1
@@ -80,7 +81,7 @@ class Greedy:
         while not q.empty():
             iterations += 1
             # if iterations > 10000:
-            if iterations > 2000:
+            if iterations > self.max_iterations:
                 self.iterations_needed = iterations
                 return None
 

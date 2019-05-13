@@ -17,6 +17,8 @@ from libcube import cubes
 from libcube import model
 from libcube import conf
 
+import validation
+
 log = logging.getLogger("train")
 
 
@@ -123,6 +125,27 @@ if __name__ == "__main__":
         buf_loss_raw.append(loss_raw_t.item())
         buf_value_loss_raw.append(value_loss_raw_t.item())
         buf_policy_loss_raw.append(policy_loss_raw_t.item())
+
+        if step_idx % config.validation_iters == 0:
+            solutions, iterations = validation.solve_random_cubes(cube_env,
+                scramble_depth=20,
+                amount=20,
+                max_iterations=200,
+                net=net, device=device)
+
+            np.set_printoptions(formatter={'float': '{: 0.1f}'.format})
+
+            solved = [s for s in solutions if s]
+            lengths = [len(s) for s in solved]
+
+            print(" ==== Validation ==== ")
+            print('iterations per solve:', np.percentile(iterations, [0, 25, 50, 75, 100]))
+            print('solution length:', np.percentile(lengths, [0, 25, 50, 75, 100]))
+
+            pct_solved = len([s for s in solved]) / len(solutions)
+            iterations_75_percentile = np.percentile(lengths, [75])[0]
+            writer.add_scalar("validation_pct_solved", pct_solved, step_idx)
+            writer.add_scalar("iterations_75_percentile", iterations_75_percentile, step_idx)
 
         if config.train_report_batches is not None and step_idx % config.train_report_batches == 0:
             m_policy_loss = np.mean(buf_policy_loss)

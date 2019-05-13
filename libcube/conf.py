@@ -93,6 +93,10 @@ class Config:
     def iterative_scramble_deepening(self):
         return self.sect_train.getboolean('iterative_scramble_deepening', False)
 
+    @property
+    def validation_iters(self):
+        return self.sect_train.getint('validation_iters', 100)
+
     # higher-level functions
     def train_name(self, suffix=None):
         res = "%s-%s-d%d" % (self.cube_type, self.run_name, self.train_scramble_depth)
