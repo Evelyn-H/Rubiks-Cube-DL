@@ -155,8 +155,8 @@ if __name__ == "__main__":
                 writer.add_scalar(f"validation_pct_solved_{scramble_depth}", pct_solved, step_idx)
                 writer.add_scalar(f"iterations_75_percentile_{scramble_depth}", iterations_75_percentile, step_idx)
 
-            validation_stats(scramble_depth=3)
             validation_stats(scramble_depth=7)
+            validation_stats(scramble_depth=10)
             validation_stats(scramble_depth=20)
 
         if config.train_report_batches is not None and step_idx % config.train_report_batches == 0:
