@@ -136,7 +136,6 @@ if __name__ == "__main__":
                     max_iterations=200,
                     net=net, device=device)
 
-
                 solved = [s for s in solutions if s]
                 lengths = [len(s) for s in solved]
                 iterations_not_none = [i for i in iterations if i]

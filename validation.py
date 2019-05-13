@@ -15,21 +15,22 @@ def solve_random_cubes(cube_env, scramble_depth, amount, max_iterations, net, de
         solutions = []
         iterations_needed = []
         try:
-            scramble = solver.generate_task(cube_env, scramble_depth)
-            scrambled = cube_env.scramble(map(cube_env.action_enum, scramble))
+            for _ in range(amount):
+                scramble = solver.generate_task(cube_env, scramble_depth)
+                scrambled = cube_env.scramble(map(cube_env.action_enum, scramble))
 
-            tree, solution = solve_cube(cube_env, scrambled, net, device, max_iterations)
+                tree, solution = solve_cube(cube_env, scrambled, net, device, max_iterations)
 
-            # check if it's actually solved
-            if solution is not None:
-                final_state, is_valid = solver.is_solution_valid(cube_env, scrambled, solution)
-                if not is_valid:
-                    print('INVALID SOLUTION RETURNED:', cube_env.render(final_state))
-                    print('scramble:', scramble)
-                    print('solution:', solution)
+                # check if it's actually solved
+                if solution is not None:
+                    final_state, is_valid = solver.is_solution_valid(cube_env, scrambled, solution)
+                    if not is_valid:
+                        print('INVALID SOLUTION RETURNED:', cube_env.render(final_state))
+                        print('scramble:', scramble)
+                        print('solution:', solution)
 
-            solutions.append(solution)
-            iterations_needed.append(len(tree) if solution else None)
+                solutions.append(solution)
+                iterations_needed.append(len(tree) if solution else None)
 
         except Exception:
             pass
