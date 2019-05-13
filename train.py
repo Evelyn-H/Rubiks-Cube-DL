@@ -127,6 +127,8 @@ if __name__ == "__main__":
         buf_policy_loss_raw.append(policy_loss_raw_t.item())
 
         if step_idx % config.validation_iters == 0:
+            print(" ==== Validation ==== ")
+
             solutions, iterations = validation.solve_random_cubes(cube_env,
                 scramble_depth=20,
                 amount=20,
@@ -137,13 +139,17 @@ if __name__ == "__main__":
 
             solved = [s for s in solutions if s]
             lengths = [len(s) for s in solved]
+            iterations_not_none = [i for i in iterations if i]
 
-            print(" ==== Validation ==== ")
             print('iterations per solve:', np.percentile([i for i in iterations if i], [0, 25, 50, 75, 100]))
             print('solution length:', np.percentile(lengths, [0, 25, 50, 75, 100]))
 
             pct_solved = len([s for s in solved]) / len(solutions)
-            iterations_75_percentile = np.percentile([i for i in iterations if i], [75])[0]
+            if len(iterations_not_none) > 0:
+                iterations_75_percentile = np.percentile(iterations_not_none, [75])[0]
+            else:
+                iterations_75_percentile = 0
+
             writer.add_scalar("validation_pct_solved", pct_solved, step_idx)
             writer.add_scalar("iterations_75_percentile", iterations_75_percentile, step_idx)
 
