@@ -128,7 +128,7 @@ class Greedy:
                 heuristic = -value #+ len(p)# - probability
                 curve_val = -8.346825 + 8.494041 * np.exp(-0.1786749*len(p))
                 # heuristic = -value #- curve_val*0.8# - probability
-                q.put((heuristic, c_state, p))
+                q.put((heuristic, c_state, p, states + [s]))
 
     def search(self):
         return self.bfs()
