@@ -128,7 +128,6 @@ class Greedy:
 
                 # if c_state in seen:
                     # continue
-                print(best_action)
 
                 # curve_val = -8.346825 + 8.494041 * np.exp(-0.1786749*len(p))
                 # heuristic = -value #- curve_val*0.8# - probability
