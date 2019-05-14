@@ -84,11 +84,16 @@ class Greedy:
             if iterations > self.max_iterations:
                 self.iterations_needed = iterations
                 l = [0]*20
+                o = 0
                 while not q.empty():
                     value, s, path = q.get()
-                    l[len(path)] += 1
+                    if len(path) < 20:
+                        l[len(path)] += 1
+                    else:
+                        o += 1
 
                 print(*[d for d in l], sep='\n')
+                print('>20:', o)
                 return None
 
             value, s, path = q.get()
