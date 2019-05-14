@@ -104,9 +104,9 @@ class Greedy:
             value, s, path, states = q.get()
             # print(value)
             if s in states:
-                print('seen')
+                # print('seen')
                 continue
-                
+
             # seen.add(s)
             c_states, c_goals = self.cube_env.explore_state(s)
             values = self.eval_states_values(c_states)
