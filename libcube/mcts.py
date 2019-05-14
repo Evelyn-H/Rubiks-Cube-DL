@@ -94,7 +94,7 @@ class Greedy:
                         # v[len(path)-1] += value
                     else:
                         o += 1
-                        o_v += value
+                        # o_v += value
 
                 # print(*[f"{d}, {v/d}" for d, v in zip(l, v)], sep='\n')
                 print(*[f"{d}" for d in l], sep='\n')
