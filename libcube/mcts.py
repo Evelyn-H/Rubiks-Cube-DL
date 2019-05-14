@@ -88,7 +88,7 @@ class Greedy:
                 o = 0
                 # o_v = 0
                 while not q.empty():
-                    value, s, path = q.get()
+                    value, s, path, states = q.get()
                     if len(path)-1 < 20:
                         l[len(path)-1] += 1
                         # v[len(path)-1] += value
@@ -105,6 +105,8 @@ class Greedy:
             # print(value)
             if s in states:
                 print('seen')
+                continue
+                
             # seen.add(s)
             c_states, c_goals = self.cube_env.explore_state(s)
             values = self.eval_states_values(c_states)
