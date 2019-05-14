@@ -117,9 +117,15 @@ class Greedy:
                 if c_goal:
                     self.iterations_needed = iterations
                     # print(iterations)
+                    def target_value(s):
+                        c_states, c_goals = self.cube_env.explore_state(s)
+                        values = self.eval_states_values(c_states)
+                        return max([v[0] for v in values]) - 1
+
                     if len(p) > 1:
                         vals = self.eval_states_values(states)
                         print(f'values: {[f"{v[0]:.2f}" for v in vals]}')
+                        print(f'target: {[f"{target_value(v[0]):.2f}" for v in vals]}')
                     return p
 
                 if len(p) > 40:
