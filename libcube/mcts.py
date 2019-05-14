@@ -119,8 +119,7 @@ class Greedy:
                     # print(iterations)
                     if len(p) > 1:
                         vals = self.eval_states_values(states)
-                        # print(f'values: {[round(v, 2) for v in vals[0]]}')
-                        print(f'values: {vals}')
+                        print(f'values: {[round(v[0], 2) for v in vals}')
                     return p
 
                 if len(p) > 40:
