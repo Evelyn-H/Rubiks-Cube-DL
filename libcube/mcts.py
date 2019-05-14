@@ -16,7 +16,7 @@ class Greedy:
     Best-first search using the value network
     """
 
-    def __init__(self, cube_env, state, net, device, max_depth=100, max_iterations=2000):
+    def __init__(self, cube_env, state, net, device, max_depth=100, max_iterations=500):
         assert isinstance(cube_env, cubes.CubeEnv)
         assert cube_env.is_state(state)
 
@@ -97,15 +97,12 @@ class Greedy:
                         # o_v += value
 
                 # print(*[f"{d}, {v/d}" for d, v in zip(l, v)], sep='\n')
-                print(*[f"{d}" for d in l], sep='\n')
-                print('>20:', o)
+                # print(*[f"{d}" for d in l], sep='\n')
+                # print('>20:', o)
                 return None
 
             value, s, path, states = q.get()
             # print(value)
-            if s in states:
-                # print('seen')
-                continue
 
             # seen.add(s)
             c_states, c_goals = self.cube_env.explore_state(s)
@@ -124,12 +121,17 @@ class Greedy:
                 if len(p) > 20:
                     continue
 
+                if c_state in states:
+                    # print('seen')
+                    continue
+
                 # if c_state in seen:
                     # continue
 
-                heuristic = -value #+ len(p)# - probability
-                curve_val = -8.346825 + 8.494041 * np.exp(-0.1786749*len(p))
+                # curve_val = -8.346825 + 8.494041 * np.exp(-0.1786749*len(p))
                 # heuristic = -value #- curve_val*0.8# - probability
+                heuristic = -value #+ len(p)# - probability
+
                 q.put((heuristic, c_state, p, states + [s]))
 
     def search(self):
