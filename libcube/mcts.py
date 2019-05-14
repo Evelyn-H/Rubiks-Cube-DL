@@ -118,8 +118,8 @@ class Greedy:
                     self.iterations_needed = iterations
                     # print(iterations)
                     if len(p) > 1:
-                        v = self.eval_states_values(states)
-                        print(f'values: {v}')
+                        vals = self.eval_states_values(states)
+                        print(f'values: {v for v in vals[0]}')
                     return p
 
                 if len(p) > 40:
