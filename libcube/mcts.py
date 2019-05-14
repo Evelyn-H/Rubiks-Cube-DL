@@ -16,7 +16,7 @@ class Greedy:
     Best-first search using the value network
     """
 
-    def __init__(self, cube_env, state, net, device, max_depth=100, max_iterations=500):
+    def __init__(self, cube_env, state, net, device, max_depth=100, max_iterations=5000):
         assert isinstance(cube_env, cubes.CubeEnv)
         assert cube_env.is_state(state)
 
