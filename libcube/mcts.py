@@ -89,9 +89,9 @@ class Greedy:
                 o_v = 0
                 while not q.empty():
                     value, s, path = q.get()
-                    if len(path) < 20:
-                        l[len(path)] += 1
-                        v[len(path)] += value
+                    if len(path)-1 < 20:
+                        l[len(path)-1] += 1
+                        v[len(path)-1] += value
                     else:
                         o += 1
                         o_v += value
