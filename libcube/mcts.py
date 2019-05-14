@@ -70,7 +70,7 @@ class Greedy:
         # but our values need to be best-first (i.e. highest)
         # so, we just used `-value` instead
         q = queue.PriorityQueue()
-        q.put((-1000, self.root_state, []))
+        q.put((-1000, self.root_state, [], []))
         seen = set()
 
         iterations = 0
@@ -101,11 +101,11 @@ class Greedy:
                 # print('>20:', o)
                 return None
 
-            value, s, path = q.get()
+            value, s, path, states = q.get()
             # print(value)
-            if s in seen:
+            if s in states:
                 print('seen')
-            seen.add(s)
+            # seen.add(s)
             c_states, c_goals = self.cube_env.explore_state(s)
             values = self.eval_states_values(c_states)
             # policy, values = self.evaluate_states(c_states)
