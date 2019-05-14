@@ -118,7 +118,7 @@ class Greedy:
                     # print(iterations)
                     return p
 
-                if len(p) > 20:
+                if len(p) > 40:
                     continue
 
                 if c_state in states:
