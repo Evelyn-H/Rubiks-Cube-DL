@@ -94,6 +94,10 @@ class Config:
         return self.sect_train.getboolean('iterative_scramble_deepening', False)
 
     @property
+    def decay_inv_weights(self):
+        return self.sect_train.getboolean('decay_inv_weights', True)
+
+    @property
     def validation_iters(self):
         return self.sect_train.getint('validation_iters', 500)
 

@@ -73,7 +73,7 @@ if __name__ == "__main__":
             log.info("LR decrease to %s", sched.get_lr()[0])
             writer.add_scalar("lr", sched.get_lr()[0], step_idx)
 
-        if step_idx % 1000 == 0:
+        if config.decay_inv_weights and step_idx % 1000 == 0:
             weight_decay_mult *= 0.8
             log.info("Weight decay multiplier decreased to %s", weight_decay_mult)
 
