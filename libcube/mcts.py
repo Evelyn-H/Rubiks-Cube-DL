@@ -140,8 +140,8 @@ class Greedy:
                 q.put((heuristic, c_state, p, states + [s]))
 
     def search(self):
-        return self.bfs()
-        # return self.simple_traversal()
+        # return self.bfs()
+        return self.simple_traversal()
 
     def find_solution(self):
         return []
