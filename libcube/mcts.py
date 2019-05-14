@@ -83,6 +83,12 @@ class Greedy:
             # if iterations > 10000:
             if iterations > self.max_iterations:
                 self.iterations_needed = iterations
+                l = [0]*20
+                while not q.empty():
+                    value, s, path = q.get()
+                    l[len(path)] += 1
+
+                print(*[d for d in l], sep='\n')
                 return None
 
             value, s, path = q.get()
