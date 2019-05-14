@@ -103,6 +103,8 @@ class Greedy:
 
             value, s, path = q.get()
             # print(value)
+            if s in seen:
+                print('seen')
             seen.add(s)
             c_states, c_goals = self.cube_env.explore_state(s)
             values = self.eval_states_values(c_states)
@@ -120,8 +122,7 @@ class Greedy:
                 # if len(p) > 20:
                     # continue
 
-                if c_state in seen:
-                    print('seen')
+                # if c_state in seen:
                     # continue
 
                 heuristic = -value #+ len(p)# - probability
