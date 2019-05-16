@@ -88,8 +88,8 @@ if __name__ == "__main__":
     sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci=95, ax=plot)
     plot.plot(depths, straight_line, scaley=False)
     plot.set_title("Values per depths")
-    plot.xlabel('scramble depth')
-    plot.ylabel('state value')
+    plot.set_xlabel('scramble depth')
+    plot.set_ylabel('state value')
     plot.legend(['value network', 'optimal solution', 'y = -x'])
     plot.get_figure().savefig(args.output + "-vals_vs_depths.png")
 
