@@ -255,9 +255,11 @@ if __name__ == "__main__":
     log.info("Network loaded from %s", args.model)
 
     if args.random is not None:
-        task = generate_task(cube_env, args.random)
-        solve_task(cube_env, task, net, max_seconds=args.max_time, max_steps=args.max_steps, device=device,
-                   batch_size=args.batch)
+        for _ in args.samples:
+            task = generate_task(cube_env, args.random)
+            print(task)
+        # solve_task(cube_env, task, net, max_seconds=args.max_time, max_steps=args.max_steps, device=device,
+                   # batch_size=args.batch)
     elif args.perm is not None:
         task = list(map(int, args.perm.split(',')))
         solve_task(cube_env, task, net, max_seconds=args.max_time, max_steps=args.max_steps, device=device,
