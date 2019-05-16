@@ -86,6 +86,9 @@ if __name__ == "__main__":
         policy_out_t, value_out_t = net(x_t)
         value_out_t = value_out_t.squeeze(-1)
 
+        # make weights less harsh
+        weights_t = weights_t.sqrt()
+
         # decay weights
         # decay_weights = 1 - (1 - weights_t) * 2.71**(-step_idx / 3000)
         decay_weights = 1 - (1 - weights_t) * weight_decay_mult
