@@ -1,4 +1,4 @@
-.PHONY: default connect forward board output plots submit debug
+.PHONY: default connect forward board output plots submit debug mount
 
 
 default: ;
@@ -23,3 +23,6 @@ debug:
 
 submit:
 	sbatch --output="output/output.%J.$(shell date +"%Y-%m-%d_%H-%M").txt" "$(job).sh"
+
+mount:
+	gvfs-mount sftp://pp563877@login18-g-1.hpc.itc.rwth-aachen.de/home/pp563877
