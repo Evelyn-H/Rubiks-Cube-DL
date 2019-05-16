@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
     # plot value per depth of scramble
     ideal_value = [-d for d in depths]
-    plot = sns.lineplot(depths, zip(value, ideal_value))
+    plot = sns.lineplot(depths, list(zip(value, ideal_value)))
     plot.set_title("Values per depths")
     plot.get_figure().savefig(args.output + "-vals_vs_depths.png")
 
