@@ -82,7 +82,8 @@ if __name__ == "__main__":
     policy = F.softmax(policy_t, dim=1).cpu().detach().numpy()
 
     # plot value per depth of scramble
-    plot = sns.lineplot(depths, value)
+    ideal_value = [-d for d in depths]
+    plot = sns.lineplot(depths, zip(value, ideal_value))
     plot.set_title("Values per depths")
     plot.get_figure().savefig(args.output + "-vals_vs_depths.png")
 
