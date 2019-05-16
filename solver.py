@@ -255,7 +255,7 @@ if __name__ == "__main__":
     log.info("Network loaded from %s", args.model)
 
     if args.random is not None:
-        for _ in args.samples:
+        for _ in range(args.samples):
             task = generate_task(cube_env, args.random)
             print(task)
         # solve_task(cube_env, task, net, max_seconds=args.max_time, max_steps=args.max_steps, device=device,
