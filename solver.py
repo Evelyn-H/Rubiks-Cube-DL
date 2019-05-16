@@ -273,6 +273,7 @@ if __name__ == "__main__":
             for _ in range(args.samples):
                 task = generate_task(cube_env, d)
                 print(' '.join(map(lambda a: trans[a], task)))
+            print()
         # solve_task(cube_env, task, net, max_seconds=args.max_time, max_steps=args.max_steps, device=device,
                    # batch_size=args.batch)
     elif args.perm is not None:
