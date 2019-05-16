@@ -86,7 +86,7 @@ if __name__ == "__main__":
     straight_line = [-d for d in depths]
     plot = sns.lineplot(depths, value, ci=95)
     plot.plot(depths, straight_line, scaley=False)
-    plot.plot([d[0] for d in optimal], [-d[1] for d in optimal], scaley=False)
+    sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci=95, ax=plot)
     plot.set_title("Values per depths")
     plot.get_figure().savefig(args.output + "-vals_vs_depths.png")
 
