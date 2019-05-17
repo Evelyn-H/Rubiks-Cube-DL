@@ -11,7 +11,7 @@
 ### CONFIGURATION
 
 # memory
-#SBATCH --mem-per-cpu=8G
+#SBATCH --mem-per-cpu=16G
 
 # job name
 #SBATCH --job-name=RubiksDL2
@@ -23,7 +23,7 @@
 #SBATCH --gres=gpu:1
 
 # max runing time
-#SBATCH --time=01:59:00
+#SBATCH --time=24:00:00
 
 
 ### SCRIPT TO RUN
