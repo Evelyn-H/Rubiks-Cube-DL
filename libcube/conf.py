@@ -95,7 +95,7 @@ class Config:
 
     @property
     def decay_inv_weights(self):
-        return self.sect_train.getboolean('decay_inv_weights', True)
+        return self.sect_train.getboolean('decay_inv_weights', False)
 
     @property
     def validation_iters(self):
