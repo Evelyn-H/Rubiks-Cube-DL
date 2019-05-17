@@ -124,8 +124,8 @@ class Greedy:
 
                     if len(p) > 1:
                         vals = self.eval_states_values(states)
-                        print(f'values: {[f"{v[0]:.2f}" for v in vals]}')
-                        print(f'target: {[f"{target_value(s):.2f}" for s in states]}')
+                        # print(f'values: {[f"{v[0]:.2f}" for v in vals]}')
+                        # print(f'target: {[f"{target_value(s):.2f}" for s in states]}')
                     return p
 
                 if len(p) > 40:
