@@ -231,7 +231,7 @@ if __name__ == "__main__":
                         help="Count of tests of each depth, default=%s" % PLOT_TASKS)
     parser.add_argument("-b", "--batch", type=int, default=1, help="Batch size to use during the search, default=1")
     parser.add_argument("--cuda", default=False, action="store_true", help="Enable cuda")
-    parser.add_argument("--seed", type=int, default=42, help="Seed to use, if zero, no seed used. default=42")
+    parser.add_argument("--seed", type=int, default=None, help="Seed to use, if zero, no seed used. default=42")
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("-i", "--input", help="Text file with permutations to read cubes to solve, "
                                              "possibly produced by gen_cubes.py")
