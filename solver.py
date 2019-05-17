@@ -113,8 +113,9 @@ def gather_data(cube_env, net, max_seconds, max_steps, max_depth, samples_per_de
                      100.0*solved_count/samples_per_depth)
 
             np.set_printoptions(formatter={'float': '{: 0.1f}'.format})
-            print('iterations per solve:', np.percentile(iterations_needed, [0, 25, 50, 75, 100]))
-            print('solution length:', np.percentile(solution_length, [0, 25, 50, 75, 100]))
+            if len(iterations_needed) > 0:
+                print('iterations per solve:', np.percentile(iterations_needed, [0, 25, 50, 75, 100]))
+                print('solution length:', np.percentile(solution_length, [0, 25, 50, 75, 100]))
     except KeyboardInterrupt:
         log.info("Interrupt received, got %d data samples, use them", len(result))
     return result
