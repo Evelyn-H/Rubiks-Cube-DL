@@ -111,7 +111,7 @@ if __name__ == "__main__":
         policy_loss_t = policy_loss_t.mean()
         # total loss
         loss_raw_t = policy_loss_raw_t + value_loss_raw_t
-        loss_t = value_loss_t + 0.3*policy_loss_t
+        loss_t = value_loss_t + 0.0*policy_loss_t
         # backprop
         loss_t.backward()
         opt.step()
