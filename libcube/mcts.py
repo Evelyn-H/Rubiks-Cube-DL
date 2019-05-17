@@ -33,6 +33,8 @@ class Greedy:
         path = []
         next_state = self.root_state
 
+        values = []
+
         depth = 0
         while depth < self.max_depth:
             depth += 1
@@ -43,6 +45,7 @@ class Greedy:
             for a_idx, (c_state, c_goal) in enumerate(zip(c_states, c_goals)):
                 if c_goal:
                     self.iterations_needed = len(path) + 1
+                    print(f'values: {[f"{v:.2f}" for v in values]}')
                     return path + [a_idx]
 
             # otherwise...
@@ -60,6 +63,8 @@ class Greedy:
             action = np.argmax(values)
             next_state = c_states[action]
             path += [action]
+
+            values.append(values[action])
 
         self.iterations_needed = self.max_depth
         return None
