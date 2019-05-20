@@ -86,7 +86,8 @@ if __name__ == "__main__":
     # plot value per depth of scramble
     optimal = optimal_lengths.all
     straight_line = [-d for d in depths]
-    plot = sns.lineplot(depths, value, ci="sd")
+    # plot = sns.lineplot(depths, value, ci="sd")
+    plot = sns.kdeplot(depths, value, shade=True)
     sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci="sd", ax=plot)
     plot.plot(depths, straight_line, scaley=False)
     plot.set_title("Values per depths")
