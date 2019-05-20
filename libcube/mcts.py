@@ -16,7 +16,7 @@ class Greedy:
     Best-first search using the value network
     """
 
-    def __init__(self, cube_env, state, net, device, max_depth=100, max_iterations=5000):
+    def __init__(self, cube_env, state, net, device, max_depth=500, max_iterations=5000):
         assert isinstance(cube_env, cubes.CubeEnv)
         assert cube_env.is_state(state)
 
@@ -150,8 +150,8 @@ class Greedy:
                 q.put((heuristic, c_state, p, states + [s]))
 
     def search(self):
-        return self.bfs()
-        # return self.simple_traversal()
+        # return self.bfs()
+        return self.simple_traversal()
 
     def find_solution(self):
         return []
