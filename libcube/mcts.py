@@ -219,6 +219,8 @@ class MCTS:
         self.val_maxes = collections.defaultdict(lambda: np.zeros(shape, dtype=np.float32))
         # correspond to P_s(a)
         self.prob_actions = {}
+        # values
+        self.values = {}
         # correspond to L_s(a)
         self.virt_loss = collections.defaultdict(lambda: np.zeros(shape, dtype=np.float32))
         # TODO: check speed and memory of edge-less version
@@ -312,6 +314,10 @@ class MCTS:
         policies, values = self.evaluate_states(leaf_states)
         for s, p in zip(leaf_states, policies):
             self.prob_actions[s] = p
+            # get values
+            child_states, child_goal = self.cube_env.explore_state(s)
+            values = self.eval_states_values(child_states)
+            print(values)
         return values
 
     def _backup_leaf(self, states, actions, value):
