@@ -295,8 +295,11 @@ class MCTS:
                 act = random.randrange(len(self.cube_env.action_enum))
             else:
                 u = self.exploration_c * N_sqrt / (act_counts + 1)
+                # u *= self.prob_actions[s]
                 # IDEA: use softmax of values instead of probability network
-                u *= self.prob_actions[s]
+                e = np.exp(np.array(self.values[s]))
+                u *= e / np.sum(e)
+
                 q = self.val_maxes[s] - self.virt_loss[s]
                 act = np.argmax(u + q)
             self.virt_loss[s][act] += self.virt_loss_nu
@@ -317,8 +320,7 @@ class MCTS:
             # get values
             child_states, child_goal = self.cube_env.explore_state(s)
             values = self.eval_states_values(child_states)
-            values = np.ravel(values)
-            print(values)
+            self.values[s] = np.ravel(values)
         return values
 
     def _backup_leaf(self, states, actions, value):
