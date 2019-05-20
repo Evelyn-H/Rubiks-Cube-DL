@@ -293,6 +293,7 @@ class MCTS:
                 act = random.randrange(len(self.cube_env.action_enum))
             else:
                 u = self.exploration_c * N_sqrt / (act_counts + 1)
+                # IDEA: use softmax of values instead of probability network
                 u *= self.prob_actions[s]
                 q = self.val_maxes[s] - self.virt_loss[s]
                 act = np.argmax(u + q)
