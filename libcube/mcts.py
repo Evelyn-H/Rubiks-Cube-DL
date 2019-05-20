@@ -317,6 +317,7 @@ class MCTS:
             # get values
             child_states, child_goal = self.cube_env.explore_state(s)
             values = self.eval_states_values(child_states)
+            values = np.ravel(values)
             print(values)
         return values
 
