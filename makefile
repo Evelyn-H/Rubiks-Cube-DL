@@ -16,10 +16,10 @@ output:
 	tail -f -n 50 output/$(shell ls output -t | head -n1)
 
 plots:
-	pipenv run python solver.py --env cube$(e)x$(e) --cuda --plot plots/$(name) --model saves/$(model) --max-steps 10000 --samples 20 --max-depth 20
+	pipenv run python solver.py --env cube$(e) --cuda --plot plots/$(name) --model saves/$(model) --max-steps 10000 --samples 20 --max-depth 20
 
 debug:
-	pipenv run python train_debug.py --env cube$(e)x$(e) --model saves/$(model) --output plots/$(name)
+	pipenv run python train_debug.py --env cube$(e) --model saves/$(model) --output plots/$(name)
 
 submit:
 	sbatch --output="output/output.%J.$(shell date +"%Y-%m-%d_%H-%M").txt" "$(job).sh"
