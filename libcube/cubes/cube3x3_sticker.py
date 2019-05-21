@@ -225,9 +225,26 @@ def render(state):
                          right=sides[4], bottom=sides[5])
 
 
+def col_to_num(col):
+    return {
+        'W': 0,
+        'G': 1,
+        'O': 2,
+        'R': 3,
+        'B': 4,
+        'Y': 5,
+    }[col]
+
+
+def one_hot(a, n_labels):
+    b = np.zeros((len(a), n_labels))
+    b[np.arange(len(a)), a] = 1
+    return b
+
 encoded_shape = (54, 6)
 
 
+#TODO: Make this faster...
 def encode_inplace(target, state):
     assert isinstance(state, State)
     global corner_colors, corner_maps, side_colors, side_maps
@@ -236,16 +253,6 @@ def encode_inplace(target, state):
     # set to solved state
     for i in range(6):
         sides[i, :] = i
-
-    def col_to_num(col):
-        return {
-            'W': 0,
-            'G': 1,
-            'O': 2,
-            'R': 3,
-            'B': 4,
-            'Y': 5,
-        }[col]
 
     for corner, orient, maps in zip(state.corner_pos, state.corner_ort, corner_maps):
         cols = corner_colors[corner]
@@ -258,11 +265,6 @@ def encode_inplace(target, state):
         cols = cols if orient == 0 else (cols[1], cols[0])
         for (arr_idx, index), col in zip(maps, cols):
             sides[arr_idx][index] = col_to_num(col)
-
-    def one_hot(a, n_labels):
-        b = np.zeros((len(a), n_labels))
-        b[np.arange(len(a)), a] = 1
-        return b
 
     for i in range(6):
         target[9*i:9*(i+1), :] = one_hot(sides[i], 6)
