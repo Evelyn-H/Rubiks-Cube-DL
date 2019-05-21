@@ -91,6 +91,8 @@ if __name__ == "__main__":
     plot = sns.scatterplot(depths, value, alpha=0.02, edgecolors='none')
     sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci="sd", ax=plot)
     plot.plot(depths, straight_line, scaley=False)
+    plot.set_xlim(0, MAX_DEPTH)
+    plot.set_ylim(-25, 0)
     plot.set_title("Values per depths")
     plot.set_xlabel('scramble depth')
     plot.set_ylabel('state value')
