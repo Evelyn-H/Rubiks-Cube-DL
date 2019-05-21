@@ -38,4 +38,4 @@ cd ~/Rubiks-Cube-DL/
 
 # run file through pipenv
 # (makes sure dependencies are all there)
-pipenv run python train.py --ini ini/cube3x3-zero-goal-d50.ini -n run_${SLURM_JOBID}
+pipenv run python train.py --ini ini/cube3x3-zero-goal-decay-d50.ini -n run_${SLURM_JOBID}
