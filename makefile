@@ -1,4 +1,4 @@
-.PHONY: default connect forward board output plots submit debug mount
+.PHONY: default connect forward board output plots submit debug mount space
 
 
 default: ;
@@ -26,3 +26,6 @@ submit:
 
 mount:
 	gvfs-mount sftp://pp563877@login18-g-1.hpc.itc.rwth-aachen.de/home/pp563877
+
+space:
+	du -h --max-depth=1 | sort -hr
