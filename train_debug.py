@@ -88,7 +88,7 @@ if __name__ == "__main__":
     straight_line = [-d for d in depths]
     # plot = sns.lineplot(depths, value, ci="sd")
     # network values
-    plot = sns.lineplot(depths, value, ci=None)
+    plot = sns.lineplot(depths, value, ci=None, label='network values')
     plot = sns.scatterplot(depths, value, alpha=0.02, edgecolors='none')
     # optimal values
     # sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci="sd", ax=plot)
@@ -96,24 +96,25 @@ if __name__ == "__main__":
     optimal_per_dist = [[] for _ in range(MAX_DEPTH)]
     for dist, length in optimal:
         optimal_per_dist[dist-1].append(-length)
-    # optimal_mean = np.array([sum(l) / len(l) for l in optimal_per_dist])
     optimal_percentiles = np.array([np.percentile(l, [25, 50, 75]) for l in optimal_per_dist]).T
+    # optimal_mean = optimal_percentiles[1]
+    optimal_mean = np.array([sum(l) / len(l) for l in optimal_per_dist])
     optimal_errors = optimal_percentiles[[0, 2], :]
-    optimal_errors[0] = optimal_percentiles[1] - optimal_errors[0]
-    optimal_errors[1] = optimal_errors[1] - optimal_percentiles[1]
+    optimal_errors[0] = optimal_mean - optimal_errors[0]
+    optimal_errors[1] = optimal_errors[1] - optimal_mean
     print(optimal_percentiles)
     print(optimal_percentiles[1])
     print(optimal_errors)
-    plot.errorbar(range(1, MAX_DEPTH+1), optimal_percentiles[1], yerr=optimal_errors)
+    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, label='optimal values')
     # y = -x
-    plot.plot(depths, straight_line, scaley=False)
+    plot.plot(depths, straight_line, scaley=False, label='y = -x')
     # plot styling
     plot.set_xlim(0, MAX_DEPTH)
     plot.set_ylim(-25, 0)
     plot.set_title("Values per depths")
     plot.set_xlabel('scramble depth')
     plot.set_ylabel('state value')
-    plot.legend(['value network', 'optimal solution', 'y = -x'])
+    # plot.legend(['value network', 'optimal solution', 'y = -x'])
     plot.get_figure().savefig(args.output + "-vals_vs_depths.png")
 
     # plot action match
