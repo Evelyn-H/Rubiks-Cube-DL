@@ -87,10 +87,18 @@ if __name__ == "__main__":
     optimal = optimal_lengths.all
     straight_line = [-d for d in depths]
     # plot = sns.lineplot(depths, value, ci="sd")
+    # network values
     plot = sns.lineplot(depths, value, ci=None)
     plot = sns.scatterplot(depths, value, alpha=0.02, edgecolors='none')
+    # optimal values
+    optimal_per_dist = [[] for _ in range(1, MAX_DEPTH+1)]
+    for dist, length in optimal:
+        optimal_per_dist[dist].append(length)
+    print(optimal_per_dist)
     sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci="sd", ax=plot)
+    # y = -x
     plot.plot(depths, straight_line, scaley=False)
+    # plot styling
     plot.set_xlim(0, MAX_DEPTH)
     plot.set_ylim(-25, 0)
     plot.set_title("Values per depths")
