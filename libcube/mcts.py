@@ -89,19 +89,19 @@ class Greedy:
             if iterations > self.max_iterations:
                 self.iterations_needed = iterations
                 l = [0] * 40
-                v = [0] * 40
+                v = [[] for _ in range(40)]
                 o = 0
-                o_v = 0
+                o_v = []
                 while not q.empty():
                     value, s, path, states = q.get()
                     if len(path)-1 < 40:
                         l[len(path)-1] += 1
-                        v[len(path)-1] += value
+                        v[len(path)-1].append(value)
                     else:
                         o += 1
-                        o_v += value
+                        o_v.append(value)
 
-                print(*[f"{d}, {v/d if d >0 else None}" for d, v in zip(l, v)], sep='\n')
+                print(*[f"{d}, {np.percentile(v, [0, 50, 100]) if len(v) > 0 else None}" for d, v in zip(l, v)], sep='\n')
                 # print(*[f"{d}" for d in l], sep='\n')
                 print('>40:', o)
                 return None
