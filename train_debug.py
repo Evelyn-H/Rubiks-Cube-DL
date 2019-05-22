@@ -95,13 +95,10 @@ if __name__ == "__main__":
     # error bars for optimal values
     optimal_per_dist = [[] for _ in range(MAX_DEPTH)]
     for dist, length in optimal:
-        optimal_per_dist[dist-1].append(length)
-    print(optimal_per_dist)
+        optimal_per_dist[dist-1].append(-length)
     optimal_mean = [sum(l) / len(l) for l in optimal_per_dist]
     optimal_errors = np.array([np.percentile(l, [0, 100]) for l in optimal_per_dist]).T
-    print(optimal_mean)
-    print(optimal_errors)
-    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_mean)
+    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors)
     # y = -x
     plot.plot(depths, straight_line, scaley=False)
     # plot styling
