@@ -99,7 +99,9 @@ if __name__ == "__main__":
     print(optimal_per_dist)
     optimal_mean = [sum(l) / len(l) for l in optimal_per_dist]
     optimal_errors = np.array([np.percentile(l, [0, 100]) for l in optimal_per_dist]).T
-    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors)
+    print(optimal_means)
+    print(optimal_errors)
+    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_mean)
     # y = -x
     plot.plot(depths, straight_line, scaley=False)
     # plot styling
