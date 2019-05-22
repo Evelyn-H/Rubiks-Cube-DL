@@ -105,7 +105,7 @@ if __name__ == "__main__":
     print(optimal_percentiles)
     print(optimal_percentiles[1])
     print(optimal_errors)
-    plot.plot(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors)
+    plot.plot(range(1, MAX_DEPTH+1), optimal_mean)
     plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, fmt='none')
     # y = -x
     plot.plot(depths, straight_line, scaley=False)
