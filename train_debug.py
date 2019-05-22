@@ -112,7 +112,7 @@ if __name__ == "__main__":
     # plot styling
     plot.set_xlim(0, MAX_DEPTH)
     plot.set_ylim(-25, 0)
-    plot.set_title("Values per depths")
+    # plot.set_title("Values per depths")
     plot.set_xlabel('D(s)')
     plot.set_ylabel('V(s)')
     # plot.legend(['network values', 'optimal values', 'V(s) = -D(s)'])
