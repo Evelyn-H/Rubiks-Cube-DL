@@ -115,7 +115,7 @@ if __name__ == "__main__":
     plot.set_title("Values per depths")
     plot.set_xlabel('D(s)')
     plot.set_ylabel('V(s)')
-    plot.legend(['network values', 'optimal values', 'V(s) = -D(s)'])
+    # plot.legend(['network values', 'optimal values', 'V(s) = -D(s)'])
     plot.get_figure().savefig(args.output + "-vals_vs_depths.png")
 
     # plot action match
