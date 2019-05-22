@@ -100,6 +100,8 @@ if __name__ == "__main__":
     optimal_errors = np.array([np.percentile(l, [0, 100]) for l in optimal_per_dist]).T
     optimal_errors[0] -= optimal_mean
     optimal_errors[1] -= optimal_mean
+    print(optimal_mean)
+    print(optimal_errors)
     plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors)
     # y = -x
     plot.plot(depths, straight_line, scaley=False)
