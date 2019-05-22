@@ -91,18 +91,20 @@ if __name__ == "__main__":
     plot = sns.lineplot(depths, value, ci=None)
     plot = sns.scatterplot(depths, value, alpha=0.02, edgecolors='none')
     # optimal values
-    sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci="sd", ax=plot)
+    # sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci="sd", ax=plot)
     # error bars for optimal values
     optimal_per_dist = [[] for _ in range(MAX_DEPTH)]
     for dist, length in optimal:
         optimal_per_dist[dist-1].append(-length)
-    optimal_mean = np.array([sum(l) / len(l) for l in optimal_per_dist])
-    optimal_errors = np.array([np.percentile(l, [0, 100]) for l in optimal_per_dist]).T
-    optimal_errors[0] = optimal_mean - optimal_errors[0]
-    optimal_errors[1] = optimal_errors[1] - optimal_mean
-    print(optimal_mean)
+    # optimal_mean = np.array([sum(l) / len(l) for l in optimal_per_dist])
+    optimal_percentiles = np.array([np.percentile(l, [25, 50, 75]) for l in optimal_per_dist]).T
+    optimal_errors = optimal_percentiles[0, 2, :]
+    optimal_errors[0] = optimal_percentiles[1] - optimal_errors[0]
+    optimal_errors[1] = optimal_errors[1] - optimal_percentiles[1]
+    print(optimal_percentiles)
+    print(optimal_percentiles[1])
     print(optimal_errors)
-    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors)
+    plot.errorbar(range(1, MAX_DEPTH+1), optimal_percentiles[1], yerr=optimal_errors)
     # y = -x
     plot.plot(depths, straight_line, scaley=False)
     # plot styling
