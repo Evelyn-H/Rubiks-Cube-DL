@@ -98,7 +98,7 @@ if __name__ == "__main__":
         optimal_per_dist[dist-1].append(length)
     print(optimal_per_dist)
     optimal_errors = [np.percentile(l, [0, 100]) for l in optimal_per_dist]
-    plot.errorbar([d[0] for d in optimal], [-d[1] for d in optimal], yerr=optimal_errors, fmt='none')
+    plot.errorbar(range(1, MAX_DEPTH+1), [l[0] for l in optimal_per_dist], yerr=optimal_errors, fmt='none')
     # y = -x
     plot.plot(depths, straight_line, scaley=False)
     # plot styling
