@@ -91,9 +91,9 @@ if __name__ == "__main__":
     plot = sns.lineplot(depths, value, ci=None)
     plot = sns.scatterplot(depths, value, alpha=0.02, edgecolors='none')
     # optimal values
-    optimal_per_dist = [[] for _ in range(1, MAX_DEPTH+1)]
+    optimal_per_dist = [[] for _ in range(MAX_DEPTH)]
     for dist, length in optimal:
-        optimal_per_dist[dist].append(length)
+        optimal_per_dist[dist-1].append(length)
     print(optimal_per_dist)
     sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci="sd", ax=plot)
     # y = -x
