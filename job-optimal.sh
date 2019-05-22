@@ -30,4 +30,4 @@ cd ~/Rubiks-Cube-DL/optimal
 # run file through pipenv
 # (makes sure dependencies are all there)
 
-optiqtm <scrambles-big-2.txt |tee results-big-2
+optiqtm <scrambles-big-3.txt |tee results-big-3
