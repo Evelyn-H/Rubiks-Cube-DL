@@ -88,22 +88,22 @@ class Greedy:
             # if iterations > 10000:
             if iterations > self.max_iterations:
                 self.iterations_needed = iterations
-                l = [0] * 20
-                # v = [0] * 20
+                l = [0] * 40
+                v = [0] * 40
                 o = 0
-                # o_v = 0
+                o_v = 0
                 while not q.empty():
                     value, s, path, states = q.get()
-                    if len(path)-1 < 20:
+                    if len(path)-1 < 40:
                         l[len(path)-1] += 1
-                        # v[len(path)-1] += value
+                        v[len(path)-1] += value
                     else:
                         o += 1
-                        # o_v += value
+                        o_v += value
 
-                # print(*[f"{d}, {v/d}" for d, v in zip(l, v)], sep='\n')
-                print(*[f"{d}" for d in l], sep='\n')
-                print('>20:', o)
+                print(*[f"{d}, {v/d}" for d, v in zip(l, v)], sep='\n')
+                # print(*[f"{d}" for d in l], sep='\n')
+                print('>40:', o)
                 return None
 
             value, s, path, states = q.get()
