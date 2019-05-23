@@ -88,7 +88,7 @@ if __name__ == "__main__":
     straight_line = [-d for d in depths]
     # plot = sns.lineplot(depths, value, ci="sd")
     # network values
-    plot = sns.lineplot(depths, value, ci=None, label='network values')
+    plot = sns.lineplot(depths, value, ci=None, label=f'network values (n={ROUND_COUNTS*MAX_DEPTH})')
     plot = sns.scatterplot(depths, value, alpha=0.02, edgecolors='none')
     # optimal values
     # sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci="sd", ax=plot)
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     print(optimal_percentiles[1])
     print(optimal_errors)
     # plot.plot(range(1, MAX_DEPTH+1), optimal_mean)
-    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, label='optimal values')
+    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, label=f'optimal values (n={len(optimal)})')
     # y = -x
     plot.plot(depths, straight_line, scaley=False, label='V(s) = -D(s)')
     # plot styling
