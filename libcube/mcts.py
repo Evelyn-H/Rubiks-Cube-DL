@@ -78,6 +78,9 @@ class Greedy:
         q.put((-1000, self.root_state, [], []))
         seen = set()
 
+        values = {}
+        values[self.root_state] = -1000
+
         iterations = 0
 
         # TODO: How can we parallelise this procedure?
@@ -128,6 +131,9 @@ class Greedy:
                 #     rendered = self.cube_env.render(c_state)
                 #     print(value, rendered)
 
+                # save value
+                values[c_state] = value
+
                 p = path + [a_idx]
                 if c_goal:
                     self.iterations_needed = iterations
@@ -155,7 +161,7 @@ class Greedy:
 
                 # curve_val = -8.346825 + 8.494041 * np.exp(-0.1786749*len(p))
                 # heuristic = -value #- curve_val*0.8# - probability
-                heuristic = -value + len(p)# - probability
+                heuristic = -value + len([s for s in states if values[s] < 10])# - probability
 
                 q.put((heuristic, c_state, p, states + [s]))
 
