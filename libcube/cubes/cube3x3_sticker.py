@@ -221,6 +221,13 @@ def render(state):
         for (arr_idx, index), col in zip(maps, cols):
             sides[arr_idx][index] = col
 
+    print('top:', sides[0])
+    print('left:', sides[1])
+    print('back:', sides[2])
+    print('front:', sides[3])
+    print('right:', sides[4])
+    print('bottom:', sides[5])
+
     return RenderedState(top=sides[0], left=sides[1], back=sides[2], front=sides[3],
                          right=sides[4], bottom=sides[5])
 
