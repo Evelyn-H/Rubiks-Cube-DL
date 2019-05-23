@@ -149,8 +149,8 @@ class Greedy:
                         # print(f'target: {[f"{target_value(s):.2f}" for s in states]}')
                     return p
 
-                if len(p) > 40:
-                    continue
+                # if len(p) > 40:
+                    # continue
 
                 if c_state in states:
                     # print('seen')
