@@ -92,6 +92,12 @@ class Greedy:
                 v = [[] for _ in range(40)]
                 o = 0
                 o_v = []
+
+                # print next best candidate state
+                value, s, path, states = q.get()
+                print(f'Best: ({value})')
+                self.cube_env.render(s)
+                q.put((value, s, path, states))
                 while not q.empty():
                     value, s, path, states = q.get()
                     if len(path)-1 < 40:
