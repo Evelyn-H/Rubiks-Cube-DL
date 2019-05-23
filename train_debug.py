@@ -106,7 +106,7 @@ if __name__ == "__main__":
     print(optimal_percentiles[1])
     print(optimal_errors)
     # plot.plot(range(1, MAX_DEPTH+1), optimal_mean)
-    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, label=f'optimal values (n={len(optimal)})')
+    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, label=f'optimal values (n=3000)')
     # y = -x
     plot.plot(depths, straight_line, scaley=False, label='V(s) = -D(s)')
     # plot styling
