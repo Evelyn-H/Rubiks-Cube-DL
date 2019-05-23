@@ -78,8 +78,8 @@ class Greedy:
         q.put((-1000, self.root_state, [], []))
         seen = set()
 
-        values = {}
-        values[self.root_state] = -1000
+        state_values = {}
+        state_values[self.root_state] = -1000
 
         iterations = 0
 
@@ -132,7 +132,7 @@ class Greedy:
                 #     print(value, rendered)
 
                 # save value
-                values[c_state] = value
+                state_values[c_state] = value
 
                 p = path + [a_idx]
                 if c_goal:
@@ -161,7 +161,7 @@ class Greedy:
 
                 # curve_val = -8.346825 + 8.494041 * np.exp(-0.1786749*len(p))
                 # heuristic = -value #- curve_val*0.8# - probability
-                heuristic = -value + len([s for s in states if values[s] < 10])# - probability
+                heuristic = -value + len([s for s in states if state_values[s] < 10])# - probability
 
                 q.put((heuristic, c_state, p, states + [s]))
 
