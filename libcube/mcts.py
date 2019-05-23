@@ -118,9 +118,9 @@ class Greedy:
             for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
                 self.nodes_evaluated += 1
 
-                if value > -1.5:
-                    rendered = self.cube_env.render(c_state)
-                    print(value, rendered)
+                # if value > -1.5:
+                #     rendered = self.cube_env.render(c_state)
+                #     print(value, rendered)
 
                 p = path + [a_idx]
                 if c_goal:
