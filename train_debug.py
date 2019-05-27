@@ -102,7 +102,7 @@ if __name__ == "__main__":
     value_errors[0] = value_mean - value_errors[0]
     value_errors[1] = value_errors[1] - value_mean
 
-    plot.errorbar(range(1, MAX_DEPTH+1), value_mean, yerr=value_errors, label=f'optimal values (n=3000)')
+    plot.errorbar(range(1, MAX_DEPTH+1), value_mean, yerr=value_errors)
     print('x', 'mean', 'error-pos', 'error-neg', sep=', ')
     for x_val, mean, error in zip(range(1, MAX_DEPTH+1), value_mean, value_errors.T):
         error_neg, error_pos = error
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     optimal_errors[0] = optimal_mean - optimal_errors[0]
     optimal_errors[1] = optimal_errors[1] - optimal_mean
     # plot.plot(range(1, MAX_DEPTH+1), optimal_mean)
-    plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, label=f'optimal values (n=3000)')
+    # plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, label=f'optimal values (n=3000)')
     # printing optimal data as csv
     # print('x', 'mean', 'error-pos', 'error-neg', sep=', ')
     # for x_val, mean, error in zip(range(1, MAX_DEPTH+1), optimal_mean, optimal_errors.T):
