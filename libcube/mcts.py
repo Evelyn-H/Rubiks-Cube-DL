@@ -121,7 +121,7 @@ class Greedy:
             c_states, c_goals = self.cube_env.explore_state(s)
             # policy, values = self.evaluate_states(c_states)
             values = self.eval_states_values(c_states)
-            # best_action = np.argmax(values)
+            best_action = np.argmax(values)
             # for a_idx, (probability, value, c_state, c_goal) in enumerate(zip(policy[0], values, c_states, c_goals)):
             for a_idx, (value, c_state, c_goal) in enumerate(zip(values, c_states, c_goals)):
                 self.nodes_evaluated += 1
@@ -162,6 +162,7 @@ class Greedy:
                 # heuristic = -value #- curve_val*0.8# - probability
                 # heuristic = -value + len([s for s in states if state_values[s] > -8])# - probability
                 heuristic = -value + len(p)# - probability
+                heuristic = -value + len(p) - (1 if a_idx == best_action else 0)
 
                 q.put((heuristic, c_state, p, states + [s]))
 
