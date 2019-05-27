@@ -105,7 +105,7 @@ if __name__ == "__main__":
     # plot.plot(range(1, MAX_DEPTH+1), optimal_mean)
     plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, label=f'optimal values (n=3000)')
     print('opt-mean', 'opt-error-pos', 'opt-error-neg', sep=', ')
-    for mean, error in zip(optimal_mean, optimal_errors):
+    for mean, error in zip(optimal_mean, optimal_errors.T):
         error_pos, error_neg = error
         print(mean, error_pos, error_neg, sep=', ')
     # y = -x
