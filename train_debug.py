@@ -95,7 +95,7 @@ if __name__ == "__main__":
     value_per_dist = [[] for _  in range(MAX_DEPTH)]
     for dist, length in zip(depths, value):
         value_per_dist[dist-1].append(length)
-    value_percentiles = np.array([np.percentile(l, [10, 50, 90]) for l in value_per_dist]).T
+    value_percentiles = np.array([np.percentile(l, [5, 50, 95]) for l in value_per_dist]).T
     value_mean = value_percentiles[1]
     # optimal_mean = np.array([sum(l) / len(l) for l in optimal_per_dist])
     value_errors = value_percentiles[[0, 2], :]
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     optimal_per_dist = [[] for _ in range(MAX_DEPTH)]
     for dist, length in optimal:
         optimal_per_dist[dist-1].append(-length)
-    optimal_percentiles = np.array([np.percentile(l, [10, 50, 90]) for l in optimal_per_dist]).T
+    optimal_percentiles = np.array([np.percentile(l, [5, 50, 95]) for l in optimal_per_dist]).T
     optimal_mean = optimal_percentiles[1]
     # optimal_mean = np.array([sum(l) / len(l) for l in optimal_per_dist])
     optimal_errors = optimal_percentiles[[0, 2], :]
@@ -125,11 +125,11 @@ if __name__ == "__main__":
     # plot.plot(range(1, MAX_DEPTH+1), optimal_mean)
     plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, label=f'optimal values (n=3000)')
     # printing optimal data as csv
-    # print('x', 'mean', 'error-pos', 'error-neg', sep=', ')
-    # for x_val, mean, error in zip(range(1, MAX_DEPTH+1), optimal_mean, optimal_errors.T):
-    #     error_neg, error_pos = error
-    #     print(x_val, mean, error_pos, error_neg, sep=', ')
-    # print()
+    print('x', 'mean', 'error-pos', 'error-neg', sep=', ')
+    for x_val, mean, error in zip(range(1, MAX_DEPTH+1), optimal_mean, optimal_errors.T):
+        error_neg, error_pos = error
+        print(x_val, mean, error_pos, error_neg, sep=', ')
+    print()
     # y = -x
     plot.plot(depths, straight_line, scaley=False, label='V(s) = -D(s)')
     # plot styling
