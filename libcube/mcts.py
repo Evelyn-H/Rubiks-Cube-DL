@@ -163,7 +163,7 @@ class Greedy:
                 # heuristic = -value + len([s for s in states if state_values[s] > -8])# - probability
                 # heuristic = -value + len(p)# - probability
                 improvement = (value - state_values[s])
-                heuristic = -improvement
+                heuristic = -value -improvement
 
                 q.put((heuristic, c_state, p, states + [s]))
 
