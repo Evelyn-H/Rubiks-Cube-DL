@@ -114,8 +114,8 @@ class Greedy:
                 print('>40:', o)
                 return None
 
-            value, s, path, states = q.get()
-            # print(value)
+            parent_value, s, path, states = q.get()
+            # print(parent_value)
 
             # seen.add(s)
             c_states, c_goals = self.cube_env.explore_state(s)
@@ -162,7 +162,8 @@ class Greedy:
                 # heuristic = -value #- curve_val*0.8# - probability
                 # heuristic = -value + len([s for s in states if state_values[s] > -8])# - probability
                 # heuristic = -value + len(p)# - probability
-                heuristic = -value + len(p)# - probability
+                improvement = (value - parent_value)
+                heuristic = -value - improvement
 
                 q.put((heuristic, c_state, p, states + [s]))
 
