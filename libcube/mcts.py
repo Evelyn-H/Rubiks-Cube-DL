@@ -162,7 +162,7 @@ class Greedy:
                 # heuristic = -value #- curve_val*0.8# - probability
                 # heuristic = -value + len([s for s in states if state_values[s] > -8])# - probability
                 # heuristic = -value + len(p)# - probability
-                heuristic = -value + len(states)# - probability
+                heuristic = -value + len([s for s in states if state_values[s] > -10])# - probability
 
                 q.put((heuristic, c_state, p, states + [s]))
 
