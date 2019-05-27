@@ -69,7 +69,6 @@ class Greedy:
         self.iterations_needed = self.max_depth
         return None
 
-    @profile
     def bfs(self):
         # note, the queue is lowest-first,
         # but our values need to be best-first (i.e. highest)
