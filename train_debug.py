@@ -91,7 +91,8 @@ if __name__ == "__main__":
     plot = sns.lineplot(depths, value, ci=None, label=f'network values (n={ROUND_COUNTS*MAX_DEPTH})')
     plot = sns.scatterplot(depths, value, alpha=0.02, edgecolors='none')
 
-    value_per_dist = [[] for _ in range(MAX_DEPTH)]
+    print(value)
+    value_per_dist = [[] for _  in range(MAX_DEPTH)]
     for dist, length in value:
         value_per_dist[dist-1].append(-length)
     value_percentiles = np.array([np.percentile(l, [10, 50, 90]) for l in value_per_dist]).T
