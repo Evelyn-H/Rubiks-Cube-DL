@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
     print(value)
     value_per_dist = [[] for _  in range(MAX_DEPTH)]
-    for dist, length in value:
+    for dist, length in zip(depths, value):
         value_per_dist[dist-1].append(-length)
     value_percentiles = np.array([np.percentile(l, [10, 50, 90]) for l in value_per_dist]).T
     value_mean = value_percentiles[1]
