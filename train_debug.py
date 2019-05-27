@@ -90,6 +90,25 @@ if __name__ == "__main__":
     # network values
     plot = sns.lineplot(depths, value, ci=None, label=f'network values (n={ROUND_COUNTS*MAX_DEPTH})')
     plot = sns.scatterplot(depths, value, alpha=0.02, edgecolors='none')
+
+    value_per_dist = [[] for _ in range(MAX_DEPTH)]
+    for dist, length in optimal:
+        value_per_dist[dist-1].append(-length)
+    value_percentiles = np.array([np.percentile(l, [10, 50, 90]) for l in value_per_dist]).T
+    value_mean = value_percentiles[1]
+    # optimal_mean = np.array([sum(l) / len(l) for l in optimal_per_dist])
+    value_errors = value_percentiles[[0, 2], :]
+    value_errors[0] = value_mean - value_errors[0]
+    value_errors[1] = value_errors[1] - value_mean
+
+    plot.errorbar(range(1, MAX_DEPTH+1), value_mean, yerr=value_errors, label=f'optimal values (n=3000)')
+    print('x', 'mean', 'error-pos', 'error-neg', sep=', ')
+    for x_val, mean, error in zip(range(1, MAX_DEPTH+1), value_mean, value_errors.T):
+        error_neg, error_pos = error
+        print(x_val, mean, error_pos, error_neg, sep=', ')
+    print()
+
+
     # optimal values
     # sns.lineplot([d[0] for d in optimal], [-d[1] for d in optimal], ci="sd", ax=plot)
     # error bars for optimal values
@@ -104,10 +123,12 @@ if __name__ == "__main__":
     optimal_errors[1] = optimal_errors[1] - optimal_mean
     # plot.plot(range(1, MAX_DEPTH+1), optimal_mean)
     plot.errorbar(range(1, MAX_DEPTH+1), optimal_mean, yerr=optimal_errors, label=f'optimal values (n=3000)')
-    print('x', 'opt-mean', 'opt-error-pos', 'opt-error-neg', sep=', ')
-    for x_val, mean, error in zip(range(1, MAX_DEPTH+1), optimal_mean, optimal_errors.T):
-        error_neg, error_pos = error
-        print(x_val, mean, error_pos, error_neg, sep=', ')
+    # printing optimal data as csv
+    # print('x', 'mean', 'error-pos', 'error-neg', sep=', ')
+    # for x_val, mean, error in zip(range(1, MAX_DEPTH+1), optimal_mean, optimal_errors.T):
+    #     error_neg, error_pos = error
+    #     print(x_val, mean, error_pos, error_neg, sep=', ')
+    # print()
     # y = -x
     plot.plot(depths, straight_line, scaley=False, label='V(s) = -D(s)')
     # plot styling
