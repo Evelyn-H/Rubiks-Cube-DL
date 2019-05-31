@@ -89,7 +89,7 @@ class Greedy:
             iterations += 1
             # if iterations > 10000:
             if iterations > self.max_iterations:
-                # self.iterations_needed = iterations
+                self.iterations_needed = iterations
                 # l = [0] * 40
                 # v = [[] for _ in range(40)]
                 # o = 0
