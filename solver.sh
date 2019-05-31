@@ -38,4 +38,4 @@ cd ~/Rubiks-Cube-DL/
 
 # run file through pipenv
 # (makes sure dependencies are all there)
-pipenv run python solver.py --env cube3x3 --cuda --plot plots/ --model saves/cube3x3-zero-goal-const-lr-d50-run_2041454/chpt_215000.dat --max-steps 10000 --samples 100 --max-depth 25
+pipenv run python solver.py --env cube3x3 --cuda --plot plots/ --model saves/cube3x3-zero-goal-const-lr-d50-run_2041413/chpt_215000.dat --max-steps 10000 --samples 100 --max-depth 25
