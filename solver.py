@@ -149,7 +149,7 @@ def solve_task(env, task, net, cube_idx=None, max_seconds=DEFAULT_MAX_SECONDS, m
         log.info("%sGot task %s, solving...", log_prefix, task)
     cube_state = env.scramble(map(env.action_enum, task))
     # tree = mcts.MCTS(env, cube_state, net, device=device, exploration_c=10)
-    tree = mcts.Greedy(env, cube_state, net, device=device); max_steps = 1
+    tree = mcts.Greedy(env, cube_state, net, device=device, max_iterations=1000); max_steps = 1
 
     step_no = 0
     ts = time.time()
