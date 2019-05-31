@@ -117,8 +117,8 @@ if __name__ == "__main__":
     for dist, length in optimal:
         optimal_per_dist[dist-1].append(-length)
     optimal_percentiles = np.array([np.percentile(l, [5, 50, 95]) for l in optimal_per_dist]).T
-    # optimal_mean = optimal_percentiles[1]
-    optimal_mean = np.array([sum(l) / len(l) for l in optimal_per_dist])
+    optimal_mean = optimal_percentiles[1]
+    # optimal_mean = np.array([sum(l) / len(l) for l in optimal_per_dist])
     optimal_errors = optimal_percentiles[[0, 2], :]
     optimal_errors[0] = optimal_mean - optimal_errors[0]
     optimal_errors[1] = optimal_errors[1] - optimal_mean
