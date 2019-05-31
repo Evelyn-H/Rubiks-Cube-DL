@@ -14,7 +14,7 @@
 #SBATCH --mem-per-cpu=32G
 
 # job name
-#SBATCH --job-name=RubiksDL3
+#SBATCH --job-name=Solver
 
 # declare the merged STDOUT/STDERR file
 #commented SBATCH --output=output/output.%J.txt
