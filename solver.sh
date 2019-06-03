@@ -20,7 +20,7 @@
 #commented SBATCH --output=output/output.%J.txt
 
 # GPU
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:3
 
 # max runing time
 #SBATCH --time=48:00:00
