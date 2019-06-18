@@ -1,1 +1,1 @@
-Code for article about Rubic's cube solution with RL: [Reinforcement learning to solve Rubik's cube](https://medium.com/datadriveninvestor/reinforcement-learning-to-solve-rubiks-cube-and-other-complex-problems-106424cf26ff)
+Fork of the project by Max Lapan, original code under GPLv3 license: https://github.com/Shmuma/rl/tree/master/articles/01_rubic
